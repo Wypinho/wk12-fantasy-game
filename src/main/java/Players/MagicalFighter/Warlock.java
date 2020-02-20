@@ -1,4 +1,4 @@
 package Players.MagicalFighter;
 
-public class Warlock extends MagicalFighter {
-}
+//public class Warlock extends MagicalFighter {
+//}

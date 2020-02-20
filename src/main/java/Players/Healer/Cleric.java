@@ -1,6 +1,14 @@
 package Players.Healer;
 
-import Behaviours.IPlayable;
+import Players.Player;
 
-public class Cleric extends Healer implements IPlayable {
+public class Cleric extends Healer {
+
+    public Cleric(String name, Double healthPoints, Double wallet) {
+        super(name, healthPoints, wallet);
+    }
+
+    public void healPlayer(Player player){
+        player.beHealed(getHealingItem().getHealingPower());
+    }
 }

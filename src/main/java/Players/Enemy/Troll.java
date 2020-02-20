@@ -1,4 +1,4 @@
 package Players.Enemy;
 
-public class Troll extends Enemy {
-}
+//public class Troll extends Enemy {
+//}

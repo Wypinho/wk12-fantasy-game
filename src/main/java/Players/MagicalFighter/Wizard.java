@@ -1,4 +1,4 @@
 package Players.MagicalFighter;
 
-public class Wizard extends MagicalFighter {
-}
+//public class Wizard extends MagicalFighter {
+//}

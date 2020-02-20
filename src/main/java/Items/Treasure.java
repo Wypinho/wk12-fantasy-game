@@ -1,4 +1,7 @@
 package Items;
 
-public class Treasure {
+public class Treasure extends Item {
+    public Treasure(String name) {
+        super(name);
+    }
 }
