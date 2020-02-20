@@ -1,4 +1,4 @@
-package Players.Enemy;
+package Players.Enemies;
 
 //public class Troll extends Enemy {
 //}
