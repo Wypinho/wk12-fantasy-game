@@ -1,21 +1,21 @@
 package Players.Healer;
-import Items.HealingItems.HealingItem;
+import Items.HealingItems.IHealable;
 import Players.Player;
 
 public abstract class Healer extends Player {
 
-    private HealingItem healingitem;
+    private IHealable healingitem;
 
     public Healer(String name, double healthPoints) {
         super(name, healthPoints);
         this.healingitem = null;
     }
 
-    public void receiveNewHealingItem(HealingItem newItem){
+    public void receiveNewHealingItem(IHealable newItem){
         this.healingitem = newItem;
     }
 
-    public HealingItem getHealingItem(){
+    public IHealable getHealingItem(){
         return this.healingitem;
     }
 

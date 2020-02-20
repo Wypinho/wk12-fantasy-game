@@ -1,27 +1,22 @@
 package Players.MeleeFighter;
 
-import Items.HealingItems.HealingItem;
-import Items.Weapons.Weapon;
-import Players.Healer.Cleric;
+import Items.Weapons.IWeapon;
 import Players.Player;
 
 public abstract class MeleeFighter extends Player {
-    private Weapon weapon;
+    private IWeapon weapon;
 
     public MeleeFighter(String name, double healthPoints) {
         super(name, healthPoints);
         weapon = null;
     }
 
-    public void receiveNewWeapon(Weapon newItem){
+    public void receiveNewWeapon(IWeapon newItem){
         this.weapon = newItem;
     }
 
-    public Weapon getWeapon(){
+    public IWeapon getWeapon(){
         return this.weapon;
     }
 
-    public void attack(Player player){
-        player.takeHealthDamage(this.weapon.getAttackPower());
-    }
 }

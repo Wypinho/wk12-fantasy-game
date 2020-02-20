@@ -1,8 +1,19 @@
 package Items.Weapons;
 
-public class Sword extends Weapon {
+import Players.Player;
 
-    public Sword(String name, double attackPower) {
-        super(name, attackPower);
+public class Sword implements IWeapon {
+    private double attackPower;
+
+    public Sword() {
+        this.attackPower = 10;
+    }
+
+    public void attack(Player player) {
+        player.takeHealthDamage(this.attackPower);
+    }
+
+    public String getType() {
+        return "Sword";
     }
 }
