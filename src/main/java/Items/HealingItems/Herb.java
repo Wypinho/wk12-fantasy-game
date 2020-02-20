@@ -19,4 +19,8 @@ public class Herb implements IHealable {
     public int getRoomsTillExpiration() {
         return this.roomsTillExpiration;
     }
+
+    public void moveRooms(){
+        this.roomsTillExpiration -= 1;
+    }
 }
