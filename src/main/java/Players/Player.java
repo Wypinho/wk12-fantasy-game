@@ -1,17 +1,20 @@
 package Players;
 
 import Items.Item;
+import Items.Treasure;
+
+import java.util.ArrayList;
 
 public abstract class Player {
 
     private String name;
     private double healthPoints;
-    private double wallet;
+    private ArrayList<Treasure> wallet;
 
-    public Player(String name, double healthPoints, double wallet) {
+    public Player(String name, double healthPoints) {
         this.name = name;
         this.healthPoints = healthPoints;
-        this.wallet = wallet;
+        this.wallet = new ArrayList<Treasure>();
     }
 
     public String getName(){
@@ -22,8 +25,12 @@ public abstract class Player {
         return this.healthPoints;
     }
 
-    public double getWallet() {
-        return this.wallet;
+    public int getWalletValue() {
+        int walletValue = 0;
+        for ( Treasure treasure : this.wallet ){
+            walletValue += treasure.getValue();
+        }
+        return walletValue;
     }
 
     public void takeHealthDamage(double amountToRemove){
@@ -32,6 +39,10 @@ public abstract class Player {
 
     public void beHealed(double amountToAdd){
         this.healthPoints += amountToAdd;
+    }
+
+    public void addTreasure(Treasure treasure){
+        this.wallet.add(treasure);
     }
 
 }

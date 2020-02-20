@@ -4,7 +4,7 @@ import Players.Player;
 
 public abstract class MagicalFighter extends Player {
 
-    public MagicalFighter(String name, Double healthPoints, Double wallet) {
-        super(name, healthPoints, wallet);
+    public MagicalFighter(String name, double healthPoints) {
+        super(name, healthPoints);
     }
 }
