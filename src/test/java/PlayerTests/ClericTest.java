@@ -1,7 +1,8 @@
 package PlayerTests;
 
 import Items.HealingItems.Potion;
-import Items.Treasure;
+import Items.Treasure.Gold;
+import Items.Treasure.Treasure;
 import Players.Healer.Cleric;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +21,7 @@ public class ClericTest {
         jeff = new Cleric("Jeff", 10.00);
         bob = new Cleric("Bob", 20.00);
         potion = new Potion();
-        gold = new Treasure("Gold", 10);
+        gold = new Gold();
     }
 
     @Test

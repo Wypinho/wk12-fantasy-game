@@ -1,6 +1,7 @@
 package RoomTests;
 
-import Items.Treasure;
+import Items.Treasure.Gold;
+import Items.Treasure.Treasure;
 import Players.Healer.Cleric;
 import Players.Player;
 import Rooms.Room;
@@ -20,7 +21,7 @@ public class RoomTest {
     @Before
     public void before(){
         bob = new Cleric("Bob", 10.00);
-        treasure = new Treasure("Gold", 10);
+        treasure = new Gold();
         treasures = new ArrayList<Treasure>();
         treasures.add(treasure);
         room = new Room(treasures);

@@ -1,7 +1,6 @@
 package Players;
 
-import Items.Item;
-import Items.Treasure;
+import Items.Treasure.Treasure;
 
 import java.util.ArrayList;
 

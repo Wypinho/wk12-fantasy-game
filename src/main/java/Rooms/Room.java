@@ -1,6 +1,6 @@
 package Rooms;
 
-import Items.Treasure;
+import Items.Treasure.Treasure;
 import Players.Player;
 
 import java.util.ArrayList;
