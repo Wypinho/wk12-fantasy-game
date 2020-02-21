@@ -11,7 +11,7 @@ public class RandomRoomGeneratorTest {
 
     @Before
     public void before(){
-        randomRoomGenerator = new RandomRoomGenerator();
+        randomRoomGenerator = new RandomRoomGenerator(1);
     }
 
     @Test
