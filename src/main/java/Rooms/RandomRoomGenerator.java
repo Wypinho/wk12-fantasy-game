@@ -9,6 +9,7 @@ import Players.Enemies.Troll;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class RandomRoomGenerator {
     private Orc orc;
@@ -27,12 +28,14 @@ public class RandomRoomGenerator {
     private ArrayList<Enemy> usedEnemies;
     private ArrayList<Treasure> potentialTreasure;
     private ArrayList<Treasure> usedTreasure;
-    private int difficulty;
-    private Room room;
+//    private int difficulty;
+//    private Room room;
+    private Random random;
 
-    public RandomRoomGenerator(int difficulty){
-        this.room = new Room;
-        this.difficulty = difficulty;
+    public RandomRoomGenerator(){
+//        this.room = new Room();
+        this.random = new Random();
+//        this.difficulty = difficulty;
         this.orc = new Orc();
         this.orc1 = new Orc();
         this.orc2 = new Orc();
@@ -55,10 +58,18 @@ public class RandomRoomGenerator {
         return this.potentialEnemies.size();
     }
 
-    public void populateRoomWithEnemies(){
-        int timesToRepeat = this.difficulty;
+    public Room generateRoom(int difficulty){
+        Room room = new Room();
+        this.populateRoomWithEnemies(difficulty, room);
+        return room;
+    }
+
+    private void populateRoomWithEnemies(int difficulty, Room room){
+        int timesToRepeat = difficulty;
         while (timesToRepeat > 0){
 
+            room.addEnemy(this.potentialEnemies.get(random.nextInt(this.potentialEnemies.size())));
+            timesToRepeat -= 1;
         }
     }
 }
