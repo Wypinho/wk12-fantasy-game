@@ -1,5 +1,6 @@
 package PlayerTests;
 
+import Items.Weapons.Club;
 import Items.Weapons.Sword;
 import Players.Healer.Cleric;
 import Players.MeleeFighter.Knight;
@@ -11,19 +12,28 @@ import static org.junit.Assert.assertEquals;
 public class KnightTest {
     Knight knight;
     Sword sword;
+    Club club;
     Cleric cleric;
 
     @Before
     public void before(){
-        knight = new Knight("Dave", 10);
+        knight = new Knight("Dave");
         sword = new Sword();
-        cleric = new Cleric("Fred", 15);
+        club = new Club();
+        cleric = new Cleric("Fred");
     }
 
     @Test
-    public void canAttackEnemy(){
+    public void canAttackEnemySpecialistWeapon(){
         knight.receiveNewWeapon(sword);
-        knight.getWeapon().attack(cleric);
-        assertEquals(5, cleric.getHealthPoints(), 0.01);
+        knight.attack(cleric);
+        assertEquals(60, cleric.getHealthPoints(), 0.01);
+    }
+
+    @Test
+    public void canAttackEnemyNonSpecialistWeapon(){
+        knight.receiveNewWeapon(club);
+        knight.attack(cleric);
+        assertEquals(75, cleric.getHealthPoints(), 0.01);
     }
 }

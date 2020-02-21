@@ -7,12 +7,12 @@ import java.util.ArrayList;
 public abstract class Player {
 
     private String name;
-    private double healthPoints;
+    protected double healthPoints;
     private ArrayList<Treasure> wallet;
 
-    public Player(String name, double healthPoints) {
+    public Player(String name) {
         this.name = name;
-        this.healthPoints = healthPoints;
+        this.healthPoints = 0;
         this.wallet = new ArrayList<Treasure>();
     }
 

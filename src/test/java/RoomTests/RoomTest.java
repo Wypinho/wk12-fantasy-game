@@ -20,7 +20,7 @@ public class RoomTest {
 
     @Before
     public void before(){
-        bob = new Cleric("Bob", 10.00);
+        bob = new Cleric("Bob");
         treasure = new Gold();
         treasures = new ArrayList<Treasure>();
         treasures.add(treasure);

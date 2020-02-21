@@ -9,11 +9,11 @@ public class Sword implements IWeapon {
         this.attackPower = 10;
     }
 
-    public void attack(Player player) {
-        player.takeHealthDamage(this.attackPower);
-    }
-
     public String getType() {
         return "Sword";
+    }
+
+    public double getAttackPower() {
+        return this.attackPower;
     }
 }
