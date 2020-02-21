@@ -25,4 +25,11 @@ public class RandomRoomGeneratorTest {
         Room room = randomRoomGenerator.generateRoom(1);
         assertEquals(1, room.enemyCount());
     }
+
+    @Test
+    public void populatesRoomWith5EnemiesForDifficulty5(){
+        Room room = randomRoomGenerator.generateRoom(5);
+        assertEquals(5, room.enemyCount());
+        assertEquals(1, randomRoomGenerator.potentialEnemiesCount());
+    }
 }

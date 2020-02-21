@@ -66,9 +66,11 @@ public class RandomRoomGenerator {
 
     private void populateRoomWithEnemies(int difficulty, Room room){
         int timesToRepeat = difficulty;
+        Enemy enemy = null;
         while (timesToRepeat > 0){
-
-            room.addEnemy(this.potentialEnemies.get(random.nextInt(this.potentialEnemies.size())));
+            enemy = this.potentialEnemies.get(random.nextInt(this.potentialEnemies.size()));
+            room.addEnemy(enemy);
+            this.potentialEnemies.remove(enemy);
             timesToRepeat -= 1;
         }
     }
