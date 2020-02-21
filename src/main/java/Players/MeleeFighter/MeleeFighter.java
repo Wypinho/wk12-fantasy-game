@@ -9,8 +9,7 @@ public abstract class MeleeFighter extends Player implements IDamage {
     protected String specialism;
 //    private String vulnerability;
 
-    public MeleeFighter(String name) {
-        super(name);
+    public MeleeFighter() {
         this.weapon = null;
         this.specialism = null;
     }
@@ -26,9 +25,9 @@ public abstract class MeleeFighter extends Player implements IDamage {
     public void attack(Player victim) {
         double multiplier = 1;
         if (this.weapon.getType().equals(this.specialism)){
-            multiplier = 2;
+            multiplier += 1;
         }
-        double damage = this.weapon.getAttackPower() * multiplier;
+        double damage = this.weapon.getAttackPower(victim) * multiplier;
         victim.takeHealthDamage(damage);
     }
 

@@ -10,8 +10,7 @@ public abstract class Player {
     protected double healthPoints;
     private ArrayList<Treasure> wallet;
 
-    public Player(String name) {
-        this.name = name;
+    public Player() {
         this.healthPoints = 0;
         this.wallet = new ArrayList<Treasure>();
     }
