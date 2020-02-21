@@ -7,7 +7,7 @@ public abstract class Healer extends Player {
     private IHealable healingitem;
 
     public Healer(String name) {
-        super(name);
+        this.name = name;
         this.healingitem = null;
     }
 

@@ -8,7 +8,7 @@ public class Sword implements IWeapon {
 
     public Sword() {
         this.attackPower = 10;
-        this.effectiveAgainst = "Orc";
+        this.effectiveAgainst = "Troll";
     }
 
     public String getType() {
@@ -16,7 +16,9 @@ public class Sword implements IWeapon {
     }
 
     public double getAttackPower(Player victim) {
-        victim.
+        if (victim.getType().equals(this.effectiveAgainst)) {
+            return this.attackPower * 2;
+        }
         return this.attackPower;
     }
 }

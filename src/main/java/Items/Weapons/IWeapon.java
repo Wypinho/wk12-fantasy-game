@@ -4,6 +4,6 @@ import Players.Player;
 
 public interface IWeapon {
 
-    double getAttackPower();
+    double getAttackPower(Player victim);
     String getType();
 }

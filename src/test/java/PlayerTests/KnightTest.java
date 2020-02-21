@@ -2,6 +2,8 @@ package PlayerTests;
 
 import Items.Weapons.Club;
 import Items.Weapons.Sword;
+import Players.Enemies.Orc;
+import Players.Enemies.Troll;
 import Players.Healer.Cleric;
 import Players.MeleeFighter.Knight;
 import org.junit.Before;
@@ -13,27 +15,31 @@ public class KnightTest {
     Knight knight;
     Sword sword;
     Club club;
-    Cleric cleric;
+    Orc orc;
+    Troll troll;
 
     @Before
     public void before(){
         knight = new Knight("Dave");
         sword = new Sword();
         club = new Club();
-        cleric = new Cleric("Fred");
+        orc = new Orc();
+        troll = new Troll();
     }
 
     @Test
-    public void canAttackEnemySpecialistWeapon(){
+    public void canAttackEnemyPlayerSpecialistWeaponAndWeaponEffectiveAgainstVictim(){
         knight.receiveNewWeapon(sword);
-        knight.attack(cleric);
-        assertEquals(60, cleric.getHealthPoints(), 0.01);
+        knight.attack(troll);
+        assertEquals(160, troll.getHealthPoints(), 0.01);
     }
 
     @Test
-    public void canAttackEnemyNonSpecialistWeapon(){
+    public void canAttackEnemyPlayerNonSpecialistWeaponAndWeaponNotEffectiveAgainstVictim(){
         knight.receiveNewWeapon(club);
-        knight.attack(cleric);
-        assertEquals(75, cleric.getHealthPoints(), 0.01);
+        knight.attack(orc);
+        assertEquals(95, orc.getHealthPoints(), 0.01);
     }
+
+
 }

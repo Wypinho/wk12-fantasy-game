@@ -6,9 +6,10 @@ import java.util.ArrayList;
 
 public abstract class Player {
 
-    private String name;
+    protected String name;
     protected double healthPoints;
     private ArrayList<Treasure> wallet;
+    protected String type;
 
     public Player() {
         this.healthPoints = 0;
@@ -17,6 +18,10 @@ public abstract class Player {
 
     public String getName(){
         return this.name;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public double getHealthPoints() {
