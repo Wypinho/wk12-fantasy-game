@@ -1,4 +1,4 @@
-package Rooms;
+package Quest.Rooms;
 
 import Items.Treasure.Treasure;
 import Players.Enemies.Enemy;

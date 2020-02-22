@@ -6,7 +6,7 @@ import Players.Enemies.Enemy;
 import Players.Enemies.Orc;
 import Players.Healer.Cleric;
 import Players.Player;
-import Rooms.Room;
+import Quest.Rooms.Room;
 import org.junit.Before;
 import org.junit.Test;
 

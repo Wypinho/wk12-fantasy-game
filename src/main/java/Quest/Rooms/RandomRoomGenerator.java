@@ -1,4 +1,4 @@
-package Rooms;
+package Quest.Rooms;
 
 import Items.Treasure.Gem;
 import Items.Treasure.Gold;
@@ -8,16 +8,9 @@ import Players.Enemies.Orc;
 import Players.Enemies.Troll;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class RandomRoomGenerator {
-    private Gold gold;
-    private Gold gold1;
-    private Gold gold2;
-    private Gem gem;
-    private Gem gem1;
-    private Gem gem2;
     private ArrayList<Enemy> potentialEnemies;
     private ArrayList<Treasure> potentialTreasure;
     private Random random;
@@ -25,17 +18,15 @@ public class RandomRoomGenerator {
     public RandomRoomGenerator(){
         this.random = new Random();
         this.potentialEnemies = new ArrayList<Enemy>();
-        this.gold = new Gold();
-        this.gold1 = new Gold();
-        this.gold2 = new Gold();
-        this.gem = new Gem();
-        this.gem1 = new Gem();
-        this.gem2 = new Gem();
-        this.potentialTreasure = new ArrayList<Treasure>(Arrays.asList(gold, gold1, gold2, gem, gem1, gem2));
+        this.potentialTreasure = new ArrayList<Treasure>();
     }
 
     public int potentialEnemiesCount() {
         return this.potentialEnemies.size();
+    }
+
+    public int potentialTreasureCount() {
+        return this.potentialTreasure.size();
     }
 
     public Room generateRoom(int difficulty){
@@ -43,6 +34,7 @@ public class RandomRoomGenerator {
         this.generatePotentialTreasure(difficulty);
         Room room = new Room();
         this.populateRoomWithEnemies(difficulty, room);
+        this.populateRoomWithTreasure(difficulty, room);
         return room;
     }
 
@@ -79,6 +71,17 @@ public class RandomRoomGenerator {
             enemy = this.potentialEnemies.get(random.nextInt(this.potentialEnemies.size()));
             room.addEnemy(enemy);
             this.potentialEnemies.remove(enemy);
+            timesToRepeat -= 1;
+        }
+    }
+
+    private void populateRoomWithTreasure(int difficulty, Room room){
+        int timesToRepeat = difficulty;
+        Treasure treasure = null;
+        while (timesToRepeat > 0){
+            treasure = this.potentialTreasure.get(random.nextInt(this.potentialTreasure.size()));
+            room.addTreasure(treasure);
+            this.potentialTreasure.remove(treasure);
             timesToRepeat -= 1;
         }
     }
