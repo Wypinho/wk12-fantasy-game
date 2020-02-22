@@ -5,16 +5,17 @@ import Players.Enemies.Enemy;
 import Players.Player;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Room {
 
     private ArrayList<Treasure> treasures;
-    private ArrayList<Player> players;
+    private ArrayList<Player> playersInRoom;
     private ArrayList<Enemy> enemies;
 
     public Room() {
         this.treasures = new ArrayList<Treasure>();
-        this.players = new ArrayList<Player>();
+        this.playersInRoom = new ArrayList<Player>();
         this.enemies = new ArrayList<Enemy>();
     }
 
@@ -23,7 +24,14 @@ public class Room {
     }
 
     public void populateRoom(ArrayList<Player> players){
-        this.players = players;
+//        ArrayList<Player> newPlayers = new ArrayList<Player>();
+//        Collections.copy(this.playersInRoom, players);
+//        this.playersInRoom = newPlayers;
+        Player player = null;
+        for (int i=0; i<players.size(); i++){
+            player = players.get(i);
+            this.playersInRoom.add(player);
+        }
     }
 
     public void addEnemy(Enemy enemy) {
@@ -31,7 +39,7 @@ public class Room {
     }
 
     public int getPlayerCount() {
-        return this.players.size();
+        return this.playersInRoom.size();
     }
 
     public ArrayList<Treasure> giveTreasure() {
@@ -50,6 +58,28 @@ public class Room {
     }
 
     public String getEnemyType(int index) {
-        return this.enemies.get(index).getType();
+        String type = this.enemies.get(index).getType();
+        String enemyDescription = "";
+        if (type.equals("Orc")){
+            enemyDescription = String.format("A hideous %s!", type);
+        } else if (type.equals("Troll")){
+            enemyDescription = String.format("An enormous %s!", type);
+        }
+        return enemyDescription;
+    }
+
+    public String getTreasureType(int index) {
+        String type = this.treasures.get(index).getType();
+        String treasureDescription = "";
+        if (type.equals("Gold")){
+            treasureDescription = String.format("Some gleaming %s!", type);
+        } else if (type.equals("Gem")){
+            treasureDescription = String.format("A glittering %s!", type);
+        }
+        return treasureDescription;
+    }
+
+    public void clearRoom() {
+        this.playersInRoom.clear();
     }
 }

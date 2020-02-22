@@ -4,5 +4,6 @@ public class Gem extends Treasure {
 
     public Gem() {
         this.value = 20;
+        this.type = "Gem";
     }
 }

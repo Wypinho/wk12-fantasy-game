@@ -30,6 +30,7 @@ public class Game {
             currentRoom = quest.getCurrentRoom(i);
             this.enterRoom();
             this.describeRoom();
+            this.exitRoom();
         }
     }
 
@@ -39,10 +40,19 @@ public class Game {
             String enemyType = currentRoom.getEnemyType(i);
             System.out.println(enemyType);
         }
+        System.out.println("You espy:");
+        for (int i = 0; i < currentRoom.treasureCount(); i++){
+            String treasureType = currentRoom.getTreasureType(i);
+            System.out.println(treasureType);
+        }
     }
 
     private void enterRoom() {
         this.currentRoom.populateRoom(this.players);
+    }
+
+    private void exitRoom() {
+        this.currentRoom.clearRoom();
     }
 
     private void gameSetUp() {
