@@ -33,11 +33,12 @@ public class Game {
             currentRoom = quest.getCurrentRoom(i);
             this.enterRoom();
             this.describeRoom();
-            this.exitRoom();
             this.playRoom();
             if (currentRoom.questFailed()){
                 break;
             }
+            this.exitRoom();
+
         }
         if (currentRoom.questFailed()){
             System.out.println("Your party are all slain - game over!");
@@ -50,14 +51,14 @@ public class Game {
         Player player;
         while (!currentRoom.roomClear() || !currentRoom.questFailed()) {
             for (int i = 0; i < players.size(); i++) {
+                if (currentRoom.roomClear() || currentRoom.questFailed()) {
+                    break;
+                }
                 player = this.players.get(i);
                 if (player instanceof IDamage) {
                     this.playerAttack(player);
                 }
                 currentRoom.checkForDead();
-                if (currentRoom.roomClear() || currentRoom.questFailed()) {
-                    break;
-                }
             }
         }
         if (currentRoom.roomClear()){
@@ -89,6 +90,7 @@ public class Game {
         System.out.println(attackResult);
         if (enemy.isDead()){
             String confirmKill = String.format("You killed the %s!", enemy.getType());
+            System.out.println(confirmKill);
         }
     }
 

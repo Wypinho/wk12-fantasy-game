@@ -102,7 +102,7 @@ public class Room {
                 playersAlive.add(player);
             }
         }
-        this.enemies = enemiesAlive;
+        this.playersInRoom = playersAlive;
     }
 
     public boolean roomClear(){
