@@ -22,8 +22,8 @@ public class Room {
         this.treasures.add(treasure);
     }
 
-    public void addPlayer(Player player){
-        this.players.add(player);
+    public void populateRoom(ArrayList<Player> players){
+        this.players = players;
     }
 
     public void addEnemy(Enemy enemy) {

@@ -35,11 +35,11 @@ public class RoomTest {
         assertEquals(1, room.treasureCount());
     }
 
-    @Test
-    public void canAddPlayerToRoom(){
-        room.addPlayer(bob);
-        assertEquals(1, room.getPlayerCount());
-    }
+//    @Test
+//    public void canAddPlayerToRoom(){
+//        room.addPlayer(bob);
+//        assertEquals(1, room.getPlayerCount());
+//    }
 
     @Test
     public void canAddEnemyToRoom(){

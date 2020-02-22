@@ -30,15 +30,7 @@ public class Quest {
         }
     }
 
-    private void generateEasyQuest(int questDifficulty) {
-
-    }
-
-    private void generateMediumQuest() {
-
-    }
-
-    private void generateHardQuest() {
-
+    public Room getCurrentRoom(int index) {
+        return this.rooms.get(index);
     }
 }

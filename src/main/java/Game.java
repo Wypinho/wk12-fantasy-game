@@ -2,6 +2,7 @@ import Players.Healer.Cleric;
 import Players.MeleeFighter.Knight;
 import Players.Player;
 import Quest.Quest;
+import Quest.Rooms.Room;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -23,6 +24,18 @@ public class Game {
         System.out.println("Welcome to Dragons & Dungeons!");
         this.playerSetUp();
         this.gameSetUp();
+        for (int i = 0; i < quest.roomCount(); i++){
+            Room currentRoom = quest.getCurrentRoom(i);
+            this.enterRoom(currentRoom);
+            this.describeRoom();
+        }
+    }
+
+    private void describeRoom() {
+    }
+
+    private void enterRoom(Room currentRoom) {
+        currentRoom.populateRoom(this.players);
     }
 
     private void gameSetUp() {
