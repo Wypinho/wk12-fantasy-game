@@ -82,4 +82,8 @@ public class Room {
     public void clearRoom() {
         this.playersInRoom.clear();
     }
+
+    public Enemy getEnemy(int index) {
+        return this.enemies.get(index);
+    }
 }

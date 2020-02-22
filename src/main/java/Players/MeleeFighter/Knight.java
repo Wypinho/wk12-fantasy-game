@@ -6,5 +6,6 @@ public class Knight extends MeleeFighter {
         this.name = name;
         this.healthPoints = 100;
         this.specialism = "Sword";
+        this.type = "Knight";
     }
 }

@@ -1,4 +1,6 @@
+import Players.Enemies.Enemy;
 import Players.Healer.Cleric;
+import Players.IDamage;
 import Players.MeleeFighter.Knight;
 import Players.Player;
 import Quest.Quest;
@@ -31,6 +33,28 @@ public class Game {
             this.enterRoom();
             this.describeRoom();
             this.exitRoom();
+            this.playRoom();
+        }
+    }
+
+    private void playRoom() {
+        Player player;
+        Enemy enemy;
+        for(int i = 0; i < players.size(); i++){
+            player = this.players.get(i);
+            if (player instanceof IDamage){
+                String identifyPlayer = String.format("%s the %s, whom shall ye attack?", player.getName(), player.getType());
+                System.out.println(identifyPlayer);
+                for (int j=0; j<this.currentRoom.enemyCount(); j++){
+                    enemy = this.currentRoom.getEnemy(j);
+                    String identifyEnemy = String.format("Type %s for %s, health %s", j+1, enemy.getType(), enemy.getHealthPoints());
+                    System.out.println(identifyEnemy);
+                }
+                String enemySelection = scanner.next();
+                int target = parseInt(enemySelection);
+                player.receiveNewWeapon();
+                ((IDamage) player).attack(currentRoom.getEnemy(target-1));
+            }
         }
     }
 
