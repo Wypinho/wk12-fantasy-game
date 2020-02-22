@@ -16,8 +16,14 @@ public class RandomRoomGeneratorTest {
     }
 
     @Test
-    public void startsWithPotentialEnemies(){
-        assertEquals(6, randomRoomGenerator.potentialEnemiesCount());
+    public void startsWithNoPotentialEnemies(){
+        assertEquals(0, randomRoomGenerator.potentialEnemiesCount());
+    }
+
+    @Test
+    public void generateRoomPopulatesPotentialEnemies(){
+        randomRoomGenerator.generateRoom(1);
+        assertEquals(5, randomRoomGenerator.potentialEnemiesCount());
     }
 
     @Test
@@ -30,6 +36,6 @@ public class RandomRoomGeneratorTest {
     public void populatesRoomWith5EnemiesForDifficulty5(){
         Room room = randomRoomGenerator.generateRoom(5);
         assertEquals(5, room.enemyCount());
-        assertEquals(1, randomRoomGenerator.potentialEnemiesCount());
+        assertEquals(4, randomRoomGenerator.potentialEnemiesCount());
     }
 }
