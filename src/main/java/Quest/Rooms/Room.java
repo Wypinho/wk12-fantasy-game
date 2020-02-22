@@ -86,4 +86,30 @@ public class Room {
     public Enemy getEnemy(int index) {
         return this.enemies.get(index);
     }
+
+    public void checkForDead() {
+        ArrayList<Enemy> enemiesAlive = new ArrayList<Enemy>();
+        for (Enemy enemy : this.enemies){
+            if (!enemy.isDead()){
+                enemiesAlive.add(enemy);
+            }
+        }
+        this.enemies = enemiesAlive;
+
+        ArrayList<Player> playersAlive = new ArrayList<Player>();
+        for (Player player : this.playersInRoom){
+            if (!player.isDead()){
+                playersAlive.add(player);
+            }
+        }
+        this.enemies = enemiesAlive;
+    }
+
+    public boolean roomClear(){
+        return this.enemies.size() == 0;
+    }
+
+    public boolean questFailed(){
+        return this.playersInRoom.size() == 0;
+    }
 }

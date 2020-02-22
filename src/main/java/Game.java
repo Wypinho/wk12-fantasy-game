@@ -1,3 +1,4 @@
+import Items.Weapons.Sword;
 import Players.Enemies.Enemy;
 import Players.Healer.Cleric;
 import Players.IDamage;
@@ -34,27 +35,60 @@ public class Game {
             this.describeRoom();
             this.exitRoom();
             this.playRoom();
+            if (currentRoom.questFailed()){
+                break;
+            }
+        }
+        if (currentRoom.questFailed()){
+            System.out.println("Your party are all slain - game over!");
+        } else {
+            System.out.println("Bravo brave adventurers - the dungeon is conquered!");
         }
     }
 
     private void playRoom() {
         Player player;
-        Enemy enemy;
-        for(int i = 0; i < players.size(); i++){
-            player = this.players.get(i);
-            if (player instanceof IDamage){
-                String identifyPlayer = String.format("%s the %s, whom shall ye attack?", player.getName(), player.getType());
-                System.out.println(identifyPlayer);
-                for (int j=0; j<this.currentRoom.enemyCount(); j++){
-                    enemy = this.currentRoom.getEnemy(j);
-                    String identifyEnemy = String.format("Type %s for %s, health %s", j+1, enemy.getType(), enemy.getHealthPoints());
-                    System.out.println(identifyEnemy);
+        while (!currentRoom.roomClear() || !currentRoom.questFailed()) {
+            for (int i = 0; i < players.size(); i++) {
+                player = this.players.get(i);
+                if (player instanceof IDamage) {
+                    this.playerAttack(player);
                 }
-                String enemySelection = scanner.next();
-                int target = parseInt(enemySelection);
-                player.receiveNewWeapon();
-                ((IDamage) player).attack(currentRoom.getEnemy(target-1));
+                currentRoom.checkForDead();
+                if (currentRoom.roomClear() || currentRoom.questFailed()) {
+                    break;
+                }
             }
+        }
+        if (currentRoom.roomClear()){
+            this.lootTreasure();
+        }
+    }
+
+    private void lootTreasure() {
+    }
+
+    private void playerAttack(Player player){
+        Enemy enemy;
+        String identifyPlayer = String.format("%s the %s, whom shall ye attack?", player.getName(), player.getType());
+        System.out.println(identifyPlayer);
+        for (int j=0; j<this.currentRoom.enemyCount(); j++){
+            enemy = this.currentRoom.getEnemy(j);
+            String identifyEnemy = String.format("Type %s for %s, health %s", j+1, enemy.getType(), enemy.getHealthPoints());
+            System.out.println(identifyEnemy);
+        }
+        String enemySelection = scanner.next();
+        int target = parseInt(enemySelection);
+
+        Sword sword = new Sword();
+//                casting - aaargh! how can I avoid this?
+        ((IDamage) player).receiveNewWeapon(sword);
+        enemy = currentRoom.getEnemy(target-1);
+        ((IDamage) player).attack(enemy);
+        String attackResult = String.format("The %s's health is down to %s!", enemy.getType(), enemy.getHealthPoints());
+        System.out.println(attackResult);
+        if (enemy.isDead()){
+            String confirmKill = String.format("You killed the %s!", enemy.getType());
         }
     }
 

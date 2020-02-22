@@ -10,10 +10,12 @@ public abstract class Player {
     protected double healthPoints;
     private ArrayList<Treasure> wallet;
     protected String type;
+    private boolean dead;
 
     public Player() {
         this.healthPoints = 0;
         this.wallet = new ArrayList<Treasure>();
+        this.dead = false;
     }
 
     public String getName(){
@@ -38,6 +40,10 @@ public abstract class Player {
 
     public void takeHealthDamage(double amountToRemove){
         this.healthPoints -= amountToRemove;
+        if (this.healthPoints <= 0){
+            this.dead = true;
+            this.healthPoints = 0;
+        }
     }
 
     public void beHealed(double amountToAdd){
@@ -48,4 +54,7 @@ public abstract class Player {
         this.wallet.add(treasure);
     }
 
+    public boolean isDead() {
+        return this.dead;
+    }
 }
