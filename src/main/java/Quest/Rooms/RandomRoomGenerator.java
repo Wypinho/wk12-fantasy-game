@@ -29,12 +29,12 @@ public class RandomRoomGenerator {
         return this.potentialTreasure.size();
     }
 
-    public Room generateRoom(int difficulty){
-        this.generatePotentialEnemies(difficulty);
-        this.generatePotentialTreasure(difficulty);
+    public Room generateRoom(int roomDifficulty){
+        this.generatePotentialEnemies(roomDifficulty);
+        this.generatePotentialTreasure(roomDifficulty);
         Room room = new Room();
-        this.populateRoomWithEnemies(difficulty, room);
-        this.populateRoomWithTreasure(difficulty, room);
+        this.populateRoomWithEnemies(roomDifficulty, room);
+        this.populateRoomWithTreasure(roomDifficulty, room);
         return room;
     }
 

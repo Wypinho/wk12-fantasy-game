@@ -1,4 +1,4 @@
-package RoomTests;
+package QuestTests.RoomTests;
 
 import Items.Treasure.Gold;
 import Items.Treasure.Treasure;

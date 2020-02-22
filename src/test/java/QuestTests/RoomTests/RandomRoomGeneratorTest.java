@@ -1,4 +1,4 @@
-package RoomTests;
+package QuestTests.RoomTests;
 
 import Quest.Rooms.RandomRoomGenerator;
 import Quest.Rooms.Room;
