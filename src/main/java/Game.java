@@ -13,11 +13,13 @@ public class Game {
     private ArrayList<Player> players;
     Scanner scanner;
     Quest quest;
+    Room currentRoom;
 
     public Game(){
         this.players = new ArrayList<Player>();
-        scanner = new Scanner(System.in);
-        quest = new Quest();
+        this.scanner = new Scanner(System.in);
+        this.quest = new Quest();
+        this.currentRoom = null;
     }
 
     public void playGame(){
@@ -25,17 +27,22 @@ public class Game {
         this.playerSetUp();
         this.gameSetUp();
         for (int i = 0; i < quest.roomCount(); i++){
-            Room currentRoom = quest.getCurrentRoom(i);
-            this.enterRoom(currentRoom);
+            currentRoom = quest.getCurrentRoom(i);
+            this.enterRoom();
             this.describeRoom();
         }
     }
 
     private void describeRoom() {
+        System.out.println("You are faced with:");
+        for (int i = 0; i < currentRoom.enemyCount(); i++){
+            String enemyType = currentRoom.getEnemyType(i);
+            System.out.println(enemyType);
+        }
     }
 
-    private void enterRoom(Room currentRoom) {
-        currentRoom.populateRoom(this.players);
+    private void enterRoom() {
+        this.currentRoom.populateRoom(this.players);
     }
 
     private void gameSetUp() {

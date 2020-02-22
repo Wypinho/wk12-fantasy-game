@@ -48,4 +48,8 @@ public class Room {
     public int enemyCount() {
         return this.enemies.size();
     }
+
+    public String getEnemyType(int index) {
+        return this.enemies.get(index).getType();
+    }
 }
