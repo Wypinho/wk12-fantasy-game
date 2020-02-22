@@ -35,7 +35,13 @@ public class RandomRoomGenerator {
         Room room = new Room();
         this.populateRoomWithEnemies(roomDifficulty, room);
         this.populateRoomWithTreasure(roomDifficulty, room);
+        this.clearPotentialArrays();
         return room;
+    }
+
+    private void clearPotentialArrays() {
+        potentialEnemies.clear();
+        potentialTreasure.clear();
     }
 
     private void generatePotentialEnemies(int difficulty){
