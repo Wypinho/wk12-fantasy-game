@@ -1,22 +1,26 @@
 package Quest.Rooms;
 
 import Items.Treasure.Treasure;
+import Items.Weapons.Sword;
 import Players.Enemies.Enemy;
+import Players.IDamage;
 import Players.Player;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Random;
 
 public class Room {
 
     private ArrayList<Treasure> treasures;
     private ArrayList<Player> playersInRoom;
     private ArrayList<Enemy> enemies;
+    private Random random;
 
     public Room() {
         this.treasures = new ArrayList<Treasure>();
         this.playersInRoom = new ArrayList<Player>();
         this.enemies = new ArrayList<Enemy>();
+        this.random = new Random;
     }
 
     public void addTreasure(Treasure treasure) {
@@ -24,9 +28,6 @@ public class Room {
     }
 
     public void populateRoom(ArrayList<Player> players){
-//        ArrayList<Player> newPlayers = new ArrayList<Player>();
-//        Collections.copy(this.playersInRoom, players);
-//        this.playersInRoom = newPlayers;
         Player player = null;
         for (int i=0; i<players.size(); i++){
             player = players.get(i);
@@ -43,9 +44,6 @@ public class Room {
     }
 
     public Treasure giveTreasure() {
-//        ArrayList<Treasure> treasuresCopy = new ArrayList<Treasure>(this.treasures);
-//        this.treasures.clear();
-//        return treasuresCopy;
         return this.treasures.remove(0);
     }
 
@@ -112,5 +110,54 @@ public class Room {
 
     public boolean questFailed(){
         return this.playersInRoom.size() == 0;
+    }
+
+    public void enemiesPlay() {
+        Enemy enemy;
+        while (!this.roomClear() && !this.questFailed()) {
+            for (int i = 0; i < this.enemies.size(); i++) {
+                if (this.roomClear() || this.questFailed()) {
+                    break;
+                }
+                enemy = this.enemies.get(i);
+                this.enemyAttack(enemy);
+                this.checkForDead();
+            }
+        }
+    }
+
+    private void enemyAttack(Enemy enemy) {
+        Player player;
+        String identifyEnemy = String.format("%s is attacking...", enemy.getType());
+        System.out.println(identifyEnemy);
+        for (int j=0; j<this.currentRoom.enemyCount(); j++){
+            enemy = this.currentRoom.getEnemy(j);
+            String identifyEnemy = String.format("Type %s for %s, health %s", j+1, enemy.getType(), enemy.getHealthPoints());
+            System.out.println(identifyEnemy);
+        }
+
+        while (!scanner.hasNextInt()) {
+            String input = scanner.next();
+            System.out.printf("\"%s\" is not a valid number.\n", input);
+        }
+        int target = scanner.nextInt();
+        while (target < 1 || target > this.currentRoom.enemyCount()) {
+            String validTargetPrompt = String.format("Please type a number between 1 and %s", this.currentRoom.enemyCount());
+            System.out.println(validTargetPrompt);
+            target = scanner.nextInt();
+        }
+//        temporarily assigning sword to fight
+        Sword sword = new Sword();
+//                casting - aaargh! how can I avoid this?
+        ((IDamage) player).receiveNewWeapon(sword);
+        enemy = currentRoom.getEnemy(target-1);
+        ((IDamage) player).attack(enemy);
+        if (enemy.isDead()){
+            String confirmKill = String.format("%s the %s killed the %s!", player.getName(), player.getType(), enemy.getType());
+            System.out.println(confirmKill);
+        } else {
+            String attackResult = String.format("The %s's health is down to %s!", enemy.getType(), enemy.getHealthPoints());
+            System.out.println(attackResult);
+        }
     }
 }

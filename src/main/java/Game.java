@@ -14,10 +14,10 @@ import java.util.Scanner;
 
 public class Game {
     private ArrayList<Player> players;
-    Scanner scanner;
-    Quest quest;
-    Room currentRoom;
-    Random random;
+    private Scanner scanner;
+    private Quest quest;
+    private Room currentRoom;
+    private Random random;
 
     public Game(){
         this.players = new ArrayList<Player>();
@@ -67,10 +67,29 @@ public class Game {
                 currentRoom.checkForDead();
                 this.checkForDead();
             }
+            currentRoom.enemiesPlay();
+            this.checkForDead();
         }
         if (currentRoom.roomClear()){
             this.lootTreasure();
         }
+    }
+
+    private void enemiesPlay() {
+//        while (!currentRoom.roomClear() && !currentRoom.questFailed()) {
+//            for (int i = 0; i < currentRoom.enemyCount(); i++) {
+//                if (currentRoom.roomClear() || currentRoom.questFailed()) {
+//                    break;
+//                }
+//                player = this.players.get(i);
+//                if (player instanceof IDamage) {
+//                    this.playerAttack(player);
+//                }
+//                currentRoom.checkForDead();
+//                this.checkForDead();
+//            }
+//            this.enemiesPlay();
+//        }
     }
 
     private void checkForDead() {
@@ -108,9 +127,7 @@ public class Game {
             String identifyEnemy = String.format("Type %s for %s, health %s", j+1, enemy.getType(), enemy.getHealthPoints());
             System.out.println(identifyEnemy);
         }
-//        String enemySelection = scanner.next();
-//        int target = parseInt(enemySelection);
-//        int target = scanner.nextInt();
+
         while (!scanner.hasNextInt()) {
             String input = scanner.next();
             System.out.printf("\"%s\" is not a valid number.\n", input);
@@ -120,8 +137,6 @@ public class Game {
             String validTargetPrompt = String.format("Please type a number between 1 and %s", this.currentRoom.enemyCount());
             System.out.println(validTargetPrompt);
             target = scanner.nextInt();
-//            enemySelection = scanner.next();
-//            target = parseInt(enemySelection);
         }
 //        temporarily assigning sword to fight
         Sword sword = new Sword();

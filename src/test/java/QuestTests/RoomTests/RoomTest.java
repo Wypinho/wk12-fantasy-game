@@ -55,6 +55,7 @@ public class RoomTest {
 
     @Test
     public void treasureCanBeRaided(){
+        room.addTreasure(treasure);
         room.giveTreasure();
         assertEquals(0, room.treasureCount());
     }
