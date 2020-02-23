@@ -42,10 +42,11 @@ public class Room {
         return this.playersInRoom.size();
     }
 
-    public ArrayList<Treasure> giveTreasure() {
-        ArrayList<Treasure> treasuresCopy = new ArrayList<Treasure>(this.treasures);
-        this.treasures.clear();
-        return treasuresCopy;
+    public Treasure giveTreasure() {
+//        ArrayList<Treasure> treasuresCopy = new ArrayList<Treasure>(this.treasures);
+//        this.treasures.clear();
+//        return treasuresCopy;
+        return this.treasures.remove(0);
     }
 
 

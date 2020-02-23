@@ -1,3 +1,4 @@
+import Items.Treasure.Treasure;
 import Items.Weapons.Sword;
 import Players.Enemies.Enemy;
 import Players.Healer.Cleric;
@@ -7,6 +8,7 @@ import Players.Player;
 import Quest.Quest;
 import Quest.Rooms.Room;
 
+import javax.smartcardio.Card;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -49,7 +51,7 @@ public class Game {
 
     private void playRoom() {
         Player player;
-        while (!currentRoom.roomClear() || !currentRoom.questFailed()) {
+        while (!currentRoom.roomClear() && !currentRoom.questFailed()) {
             for (int i = 0; i < players.size(); i++) {
                 if (currentRoom.roomClear() || currentRoom.questFailed()) {
                     break;
@@ -67,6 +69,16 @@ public class Game {
     }
 
     private void lootTreasure() {
+        while (currentRoom.treasureCount() > 0) {
+            for (Player player : this.players) {
+                Treasure treasure = currentRoom.giveTreasure();
+                player.addTreasure(treasure);
+                String identifyPlayer = String.format("%s the %s, whom shall ye attack?", player.getName(), player.getType());
+                System.out.println(identifyPlayer);
+            }
+        }
+//        ArrayList<Treasure> loot = currentRoom.giveTreasure();
+//        for (Treasure treasure : loot){
     }
 
     private void playerAttack(Player player){
