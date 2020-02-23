@@ -67,6 +67,7 @@ public class Game {
                 currentRoom.checkForDead();
                 this.checkForDead();
             }
+//            all logic should maybe be in Game but enemies live in Room...???
             currentRoom.enemiesPlay();
             this.checkForDead();
         }

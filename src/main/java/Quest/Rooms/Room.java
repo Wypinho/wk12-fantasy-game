@@ -1,9 +1,7 @@
 package Quest.Rooms;
 
 import Items.Treasure.Treasure;
-import Items.Weapons.Sword;
 import Players.Enemies.Enemy;
-import Players.IDamage;
 import Players.Player;
 
 import java.util.ArrayList;
@@ -114,7 +112,6 @@ public class Room {
 
     public void enemiesPlay() {
         Enemy enemy;
-//        while (!this.roomClear() && !this.questFailed()) {
             for (int i = 0; i < this.enemies.size(); i++) {
                 if (this.questFailed()) {
                     break;
@@ -123,7 +120,6 @@ public class Room {
                 this.enemyAttack(enemy);
                 this.checkForDead();
             }
-//        }
     }
 
     private void enemyAttack(Enemy enemy) {
