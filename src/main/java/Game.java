@@ -73,8 +73,8 @@ public class Game {
             for (Player player : this.players) {
                 Treasure treasure = currentRoom.giveTreasure();
                 player.addTreasure(treasure);
-                String identifyPlayer = String.format("%s the %s, whom shall ye attack?", player.getName(), player.getType());
-                System.out.println(identifyPlayer);
+                String treasureAcquired = String.format("%s acquired %s!", player.getName(), treasure.getType());
+                System.out.println(treasureAcquired);
             }
         }
 //        ArrayList<Treasure> loot = currentRoom.giveTreasure();
