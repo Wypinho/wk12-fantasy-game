@@ -75,22 +75,22 @@ public class Game {
         }
     }
 
-    private void enemiesPlay() {
-//        while (!currentRoom.roomClear() && !currentRoom.questFailed()) {
-//            for (int i = 0; i < currentRoom.enemyCount(); i++) {
-//                if (currentRoom.roomClear() || currentRoom.questFailed()) {
-//                    break;
-//                }
-//                player = this.players.get(i);
-//                if (player instanceof IDamage) {
-//                    this.playerAttack(player);
-//                }
-//                currentRoom.checkForDead();
-//                this.checkForDead();
-//            }
-//            this.enemiesPlay();
-//        }
-    }
+//    private void enemiesPlay() {
+////        while (!currentRoom.roomClear() && !currentRoom.questFailed()) {
+////            for (int i = 0; i < currentRoom.enemyCount(); i++) {
+////                if (currentRoom.roomClear() || currentRoom.questFailed()) {
+////                    break;
+////                }
+////                player = this.players.get(i);
+////                if (player instanceof IDamage) {
+////                    this.playerAttack(player);
+////                }
+////                currentRoom.checkForDead();
+////                this.checkForDead();
+////            }
+////            this.enemiesPlay();
+////        }
+//    }
 
     private void checkForDead() {
         ArrayList<Player> playersAlive = new ArrayList<Player>();
