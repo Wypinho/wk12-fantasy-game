@@ -8,8 +8,8 @@ import Players.Player;
 import Quest.Quest;
 import Quest.Rooms.Room;
 
-import javax.smartcardio.Card;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
@@ -19,12 +19,14 @@ public class Game {
     Scanner scanner;
     Quest quest;
     Room currentRoom;
+    Random random;
 
     public Game(){
         this.players = new ArrayList<Player>();
         this.scanner = new Scanner(System.in);
         this.quest = new Quest();
         this.currentRoom = null;
+        this.random = new Random();
     }
 
     public void playGame(){
@@ -69,16 +71,16 @@ public class Game {
     }
 
     private void lootTreasure() {
-        while (currentRoom.treasureCount() > 0) {
+        do {
             for (Player player : this.players) {
-                Treasure treasure = currentRoom.giveTreasure();
-                player.addTreasure(treasure);
-                String treasureAcquired = String.format("%s acquired %s!", player.getName(), treasure.getType());
-                System.out.println(treasureAcquired);
+                if (currentRoom.treasureCount() > 0) {
+                    Treasure treasure = currentRoom.giveTreasure();
+                    player.addTreasure(treasure);
+                    String treasureAcquired = String.format("%s acquired %s!", player.getName(), treasure.getType());
+                    System.out.println(treasureAcquired);
+                }
             }
-        }
-//        ArrayList<Treasure> loot = currentRoom.giveTreasure();
-//        for (Treasure treasure : loot){
+        } while (currentRoom.treasureCount() > 0);
     }
 
     private void playerAttack(Player player){
@@ -98,11 +100,12 @@ public class Game {
         ((IDamage) player).receiveNewWeapon(sword);
         enemy = currentRoom.getEnemy(target-1);
         ((IDamage) player).attack(enemy);
-        String attackResult = String.format("The %s's health is down to %s!", enemy.getType(), enemy.getHealthPoints());
-        System.out.println(attackResult);
         if (enemy.isDead()){
-            String confirmKill = String.format("You killed the %s!", enemy.getType());
+            String confirmKill = String.format("%s the %s killed the %s!", player.getName(), player.getType(), enemy.getType());
             System.out.println(confirmKill);
+        } else {
+            String attackResult = String.format("The %s's health is down to %s!", enemy.getType(), enemy.getHealthPoints());
+            System.out.println(attackResult);
         }
     }
 
