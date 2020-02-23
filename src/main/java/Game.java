@@ -71,15 +71,18 @@ public class Game {
     }
 
     private void lootTreasure() {
+        int lootFirstDibs = random.nextInt(this.players.size());
         do {
-            for (Player player : this.players) {
+            for (int i=lootFirstDibs; i < this.players.size(); i++){
                 if (currentRoom.treasureCount() > 0) {
+                    Player player = this.players.get(i);
                     Treasure treasure = currentRoom.giveTreasure();
                     player.addTreasure(treasure);
                     String treasureAcquired = String.format("%s acquired %s!", player.getName(), treasure.getType());
                     System.out.println(treasureAcquired);
                 }
             }
+            lootFirstDibs = 0;
         } while (currentRoom.treasureCount() > 0);
     }
 
@@ -92,9 +95,22 @@ public class Game {
             String identifyEnemy = String.format("Type %s for %s, health %s", j+1, enemy.getType(), enemy.getHealthPoints());
             System.out.println(identifyEnemy);
         }
-        String enemySelection = scanner.next();
-        int target = parseInt(enemySelection);
-
+//        String enemySelection = scanner.next();
+//        int target = parseInt(enemySelection);
+//        int target = scanner.nextInt();
+        while (!scanner.hasNextInt()) {
+            String input = scanner.next();
+            System.out.printf("\"%s\" is not a valid number.\n", input);
+        }
+        int target = scanner.nextInt();
+        while (target < 1 || target > this.currentRoom.enemyCount()) {
+            String validTargetPrompt = String.format("Please type a number between 1 and %s", this.currentRoom.enemyCount());
+            System.out.println(validTargetPrompt);
+            target = scanner.nextInt();
+//            enemySelection = scanner.next();
+//            target = parseInt(enemySelection);
+        }
+//        temporarily assigning sword to fight
         Sword sword = new Sword();
 //                casting - aaargh! how can I avoid this?
         ((IDamage) player).receiveNewWeapon(sword);
@@ -132,9 +148,11 @@ public class Game {
 
     private void gameSetUp() {
         System.out.println("Select thy difficulty level: Easy, Medium or Hard?");
-
         String difficultySelection = scanner.next();
-        String difficulty = difficultySelection;
+        while (!difficultySelection.equals("Easy") && !difficultySelection.equals("Medium") && !difficultySelection.equals("Hard")) {
+            System.out.println("Please type 'Easy', 'Medium' or 'Hard'?");
+            difficultySelection = scanner.next();
+        }
 
         if (difficultySelection.equals("Easy")){
             quest.generateQuest(1);
@@ -148,8 +166,11 @@ public class Game {
     private void playerSetUp() {
         System.out.println("How many shall brave the dungeon?");
 
-        String input = scanner.next();
-        int players = parseInt(input);
+        while (!scanner.hasNextInt()) {
+            String input = scanner.next();
+            System.out.printf("\"%s\" is not a valid number.\n", input);
+        }
+        int players = scanner.nextInt();
 
         for(int i = 0; i < players; i++){
             String namePrompt = String.format("Player %s, enter your name: ", (i + 1));
@@ -160,6 +181,10 @@ public class Game {
             System.out.println(classPrompt);
             System.out.println("Select Knight or Cleric?");
             String playerClass = scanner.next();
+            while (!playerClass.equals("Knight") && !playerClass.equals("Cleric")) {
+                System.out.println("Please type 'Knight' or 'Cleric'?");
+                playerClass = scanner.next();
+            }
 
             this.addPlayer(playerName, playerClass);
         }
