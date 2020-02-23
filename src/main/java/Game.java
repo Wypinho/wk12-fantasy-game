@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-import static java.lang.Integer.parseInt;
-
 public class Game {
     private ArrayList<Player> players;
     Scanner scanner;
@@ -44,11 +42,15 @@ public class Game {
             this.exitRoom();
 
         }
-        if (currentRoom.questFailed()){
+        if (this.questFailed()){
             System.out.println("Your party are all slain - game over!");
         } else {
             System.out.println("Bravo brave adventurers - the dungeon is conquered!");
         }
+    }
+
+    private boolean questFailed() {
+        return this.players.size() == 0;
     }
 
     private void playRoom() {
@@ -63,11 +65,22 @@ public class Game {
                     this.playerAttack(player);
                 }
                 currentRoom.checkForDead();
+                this.checkForDead();
             }
         }
         if (currentRoom.roomClear()){
             this.lootTreasure();
         }
+    }
+
+    private void checkForDead() {
+        ArrayList<Player> playersAlive = new ArrayList<Player>();
+        for (Player player : this.players){
+            if (!player.isDead()){
+                playersAlive.add(player);
+            }
+        }
+        this.players = playersAlive;
     }
 
     private void lootTreasure() {
