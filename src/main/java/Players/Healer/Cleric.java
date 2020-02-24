@@ -9,6 +9,7 @@ public class Cleric extends Healer {
         super(name);
         this.healthPoints = 80;
         this.healingItem = new Potion();
+        this.type = "Cleric";
     }
 
     public void healPlayer(Player player){

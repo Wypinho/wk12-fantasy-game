@@ -57,4 +57,11 @@ public abstract class Player {
     public boolean isDead() {
         return this.dead;
     }
+
+    public void affectPlayer(Player player){
+
+    }
+    public boolean canAffectPlayer(Player player){
+        return false;
+    }
 }

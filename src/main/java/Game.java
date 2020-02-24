@@ -64,9 +64,9 @@ public class Game {
                 if (player instanceof IDamage) {
                     this.playerAttack(player);
                 }
-//                else {
-//                    this.playerHeal(player);
-//                }
+                else {
+                    this.playerHeal(player);
+                }
                 currentRoom.checkForDead();
                 this.checkForDead();
             }
@@ -101,9 +101,11 @@ public class Game {
         }
         playerToHeal = this.players.get(target-1);
         //                casting - aaargh! how can I avoid this?
+        // could have an affect player method in Player or...
+        // all Players can attack, healers just aren't good at it?
         ((Cleric) player).healPlayer(playerToHeal);
 
-        String healResult = String.format("%s the %s's health is now %s!", playerToHeal.getType(), playerToHeal.getHealthPoints());
+        String healResult = String.format("%s the %s's health is now %s!", playerToHeal.getName(), playerToHeal.getType(), playerToHeal.getHealthPoints());
         System.out.println(healResult);
 
     }
