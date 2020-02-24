@@ -1,6 +1,8 @@
 package Players.Healer;
 
+import Items.HealingItems.IHealable;
 import Items.HealingItems.Potion;
+import Items.Weapons.Sword;
 import Players.Player;
 
 public class Cleric extends Healer {
@@ -10,8 +12,10 @@ public class Cleric extends Healer {
         this.healthPoints = 80;
         this.healingItem = new Potion();
         this.type = "Cleric";
+        this.weapon = new Sword();
     }
 
+    @Override
     public void healPlayer(Player player){
         player.beHealed(getHealingItem().getHealingPower());
     }

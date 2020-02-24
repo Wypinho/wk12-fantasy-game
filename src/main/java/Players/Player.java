@@ -1,5 +1,6 @@
 package Players;
 
+import Items.HealingItems.IHealable;
 import Items.Treasure.Treasure;
 import Items.Weapons.IWeapon;
 
@@ -66,6 +67,8 @@ public abstract class Player {
     public void beHealed(double amountToAdd){
         this.healthPoints += amountToAdd;
     }
+
+    public abstract void healPlayer(Player player);
 
     public void addTreasure(Treasure treasure){
         this.wallet.add(treasure);

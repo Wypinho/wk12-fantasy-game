@@ -2,6 +2,7 @@ import Items.Treasure.Treasure;
 import Items.Weapons.Sword;
 import Players.Enemies.Enemy;
 import Players.Healer.Cleric;
+import Players.Healer.Healer;
 import Players.IDamage;
 import Players.MeleeFighter.Knight;
 import Players.Player;
@@ -68,7 +69,18 @@ public class Game {
 //                    this.playerHeal(player);
 //                }
                 if (player.getType().equals("Cleric")) {
-                    this.playerHeal(player);
+                    String identifyPlayer = String.format("%s the %s, shall ye Attack or Heal?", player.getName(), player.getType());
+                    System.out.println(identifyPlayer);
+                    String actionSelection = scanner.next();
+                    while (!actionSelection.equals("Attack") && !actionSelection.equals("Heal")) {
+                        System.out.println("Please type 'Attack' or 'Heal'?");
+                        actionSelection = scanner.next();
+                    }
+                    if (actionSelection.equals("Attack")) {
+                        this.playerAttack(player);
+                    } else {
+                        this.playerHeal(player);
+                    }
                 }
                 else {
                     this.playerAttack(player);
@@ -106,10 +118,7 @@ public class Game {
             target = scanner.nextInt();
         }
         playerToHeal = this.players.get(target-1);
-        //                casting - aaargh! how can I avoid this?
-        // could have an affect player method in Player or...
-        // all Players can attack, healers just aren't good at it?
-        ((Cleric) player).healPlayer(playerToHeal);
+        player.healPlayer(playerToHeal);
 
         String healResult = String.format("%s the %s's health is now %s!", playerToHeal.getName(), playerToHeal.getType(), playerToHeal.getHealthPoints());
         System.out.println(healResult);
@@ -162,12 +171,8 @@ public class Game {
             System.out.println(validTargetPrompt);
             target = scanner.nextInt();
         }
-//        temporarily assigning sword to fight
-//        Sword sword = new Sword();
-//                casting - aaargh! how can I avoid this?
-//        ((IDamage) player).receiveNewWeapon(sword);
         enemy = currentRoom.getEnemy(target-1);
-        ((IDamage) player).attack(enemy);
+        player.attack(enemy);
         if (enemy.isDead()){
             String confirmKill = String.format("%s the %s killed the %s!", player.getName(), player.getType(), enemy.getType());
             System.out.println(confirmKill);

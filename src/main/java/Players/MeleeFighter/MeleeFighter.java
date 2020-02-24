@@ -31,4 +31,9 @@ public abstract class MeleeFighter extends Player {
         victim.takeHealthDamage(damage);
     }
 
+//    empty method to avoid casting Player to Cleric in game class
+    public void healPlayer(Player player){
+
+    }
+
 }
