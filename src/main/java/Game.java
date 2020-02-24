@@ -32,6 +32,8 @@ public class Game {
         System.out.println("Welcome to Dragons & Dungeons!");
         this.playerSetUp();
         this.gameSetUp();
+        this.generateRandomObjects();
+        this.equipRandomObjects();
         for (int i = 0; i < quest.roomCount(); i++){
             currentRoom = quest.getCurrentRoom(i);
             this.enterRoom();
@@ -50,6 +52,18 @@ public class Game {
         }
     }
 
+    private void generateRandomObjects() {
+        
+    }
+
+    private void equipRandomObjects() {
+        for (Player player : this.players){
+            if (player.getType().equals("Cleric")) {
+
+            }
+        }
+    }
+
     private boolean questFailed() {
         return this.players.size() == 0;
     }
@@ -62,12 +76,7 @@ public class Game {
                     break;
                 }
                 player = this.players.get(i);
-//                if (player instanceof IDamage) {
-//                    this.playerAttack(player);
-//                }
-//                else {
-//                    this.playerHeal(player);
-//                }
+
                 if (player.getType().equals("Cleric")) {
                     String identifyPlayer = String.format("%s the %s, shall ye Attack or Heal?", player.getName(), player.getType());
                     System.out.println(identifyPlayer);
