@@ -64,6 +64,9 @@ public class Game {
                 if (player instanceof IDamage) {
                     this.playerAttack(player);
                 }
+//                else {
+//                    this.playerHeal(player);
+//                }
                 currentRoom.checkForDead();
                 this.checkForDead();
             }
@@ -76,22 +79,34 @@ public class Game {
         }
     }
 
-//    private void enemiesPlay() {
-////        while (!currentRoom.roomClear() && !currentRoom.questFailed()) {
-////            for (int i = 0; i < currentRoom.enemyCount(); i++) {
-////                if (currentRoom.roomClear() || currentRoom.questFailed()) {
-////                    break;
-////                }
-////                player = this.players.get(i);
-////                if (player instanceof IDamage) {
-////                    this.playerAttack(player);
-////                }
-////                currentRoom.checkForDead();
-////                this.checkForDead();
-////            }
-////            this.enemiesPlay();
-////        }
-//    }
+    private void playerHeal(Player player) {
+        Player playerToHeal;
+        String identifyPlayer = String.format("%s the %s, whom shall ye heal?", player.getName(), player.getType());
+        System.out.println(identifyPlayer);
+        for (int j=0; j<this.players.size(); j++){
+            playerToHeal = this.players.get(j);
+            String identifyHealee = String.format("Type %s for %s the %s, health %s", j+1, playerToHeal.getName(), playerToHeal.getType(), playerToHeal.getHealthPoints());
+            System.out.println(identifyHealee);
+        }
+
+        while (!scanner.hasNextInt()) {
+            String input = scanner.next();
+            System.out.printf("\"%s\" is not a valid number.\n", input);
+        }
+        int target = scanner.nextInt();
+        while (target < 1 || target > this.players.size()) {
+            String validTargetPrompt = String.format("Please type a number between 1 and %s", this.players.size());
+            System.out.println(validTargetPrompt);
+            target = scanner.nextInt();
+        }
+        playerToHeal = this.players.get(target-1);
+        //                casting - aaargh! how can I avoid this?
+        ((Cleric) player).healPlayer(playerToHeal);
+
+        String healResult = String.format("%s the %s's health is now %s!", playerToHeal.getType(), playerToHeal.getHealthPoints());
+        System.out.println(healResult);
+
+    }
 
     private void checkForDead() {
         ArrayList<Player> playersAlive = new ArrayList<Player>();
@@ -140,9 +155,9 @@ public class Game {
             target = scanner.nextInt();
         }
 //        temporarily assigning sword to fight
-        Sword sword = new Sword();
+//        Sword sword = new Sword();
 //                casting - aaargh! how can I avoid this?
-        ((IDamage) player).receiveNewWeapon(sword);
+//        ((IDamage) player).receiveNewWeapon(sword);
         enemy = currentRoom.getEnemy(target-1);
         ((IDamage) player).attack(enemy);
         if (enemy.isDead()){

@@ -1,5 +1,8 @@
 package Players.MeleeFighter;
 
+import Items.Weapons.IWeapon;
+import Items.Weapons.Sword;
+
 public class Knight extends MeleeFighter {
 
     public Knight(String name) {
@@ -7,5 +10,6 @@ public class Knight extends MeleeFighter {
         this.healthPoints = 100;
         this.specialism = "Sword";
         this.type = "Knight";
+        this.weapon = new Sword();
     }
 }

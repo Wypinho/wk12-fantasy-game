@@ -4,19 +4,19 @@ import Players.Player;
 
 public abstract class Healer extends Player {
 
-    private IHealable healingitem;
+    protected IHealable healingItem;
 
     public Healer(String name) {
         this.name = name;
-        this.healingitem = null;
+        this.healingItem = null;
     }
 
     public void receiveNewHealingItem(IHealable newItem){
-        this.healingitem = newItem;
+        this.healingItem = newItem;
     }
 
     public IHealable getHealingItem(){
-        return this.healingitem;
+        return this.healingItem;
     }
 
     public abstract void healPlayer(Player player);

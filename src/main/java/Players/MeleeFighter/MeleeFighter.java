@@ -5,7 +5,7 @@ import Players.IDamage;
 import Players.Player;
 
 public abstract class MeleeFighter extends Player implements IDamage {
-    private IWeapon weapon;
+    protected IWeapon weapon;
     protected String specialism;
 //    private String vulnerability;
 
