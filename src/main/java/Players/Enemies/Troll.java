@@ -12,11 +12,12 @@ public class Troll extends Enemy {
         this.attackPower = 40;
     }
 
+    @Override
     public void attack(Player victim) {
         victim.takeHealthDamage(this.attackPower);
     }
 
-    public void receiveNewWeapon(IWeapon newItem) {
-
-    }
+//    public void receiveNewWeapon(IWeapon newItem) {
+//
+//    }
 }

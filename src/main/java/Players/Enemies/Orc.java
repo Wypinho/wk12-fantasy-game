@@ -13,12 +13,13 @@ public class Orc extends Enemy{
         this.weapon = new Sword();
     }
 
+    @Override
     public void attack(Player victim) {
         double damage = this.weapon.getAttackPower(victim);
         victim.takeHealthDamage(damage);
     }
 
-    public void receiveNewWeapon(IWeapon newItem) {
-
-    }
+//    public void receiveNewWeapon(IWeapon newItem) {
+//
+//    }
 }

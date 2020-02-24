@@ -1,6 +1,7 @@
 package Players;
 
 import Items.Treasure.Treasure;
+import Items.Weapons.IWeapon;
 
 import java.util.ArrayList;
 
@@ -11,12 +12,28 @@ public abstract class Player {
     private ArrayList<Treasure> wallet;
     protected String type;
     private boolean dead;
+    protected IWeapon weapon;
 
     public Player() {
         this.healthPoints = 0;
         this.wallet = new ArrayList<Treasure>();
         this.dead = false;
+        this.weapon = null;
     }
+
+    public void receiveNewWeapon(IWeapon newItem){
+        this.weapon = newItem;
+    }
+
+    public IWeapon getWeapon(){
+        return this.weapon;
+    }
+
+    public abstract void attack(Player victim);
+//    {
+//        double damage = this.weapon.getAttackPower(victim);
+//        victim.takeHealthDamage(damage);
+//    }
 
     public String getName(){
         return this.name;
@@ -58,10 +75,11 @@ public abstract class Player {
         return this.dead;
     }
 
-    public void affectPlayer(Player player){
-
-    }
-    public boolean canAffectPlayer(Player player){
-        return false;
-    }
+//    Some suggestions from Alex
+//    public void affectPlayer(Player player){
+//
+//    }
+//    public boolean canAffectPlayer(Player player){
+//        return false;
+//    }
 }

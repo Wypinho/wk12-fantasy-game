@@ -61,11 +61,17 @@ public class Game {
                     break;
                 }
                 player = this.players.get(i);
-                if (player instanceof IDamage) {
-                    this.playerAttack(player);
+//                if (player instanceof IDamage) {
+//                    this.playerAttack(player);
+//                }
+//                else {
+//                    this.playerHeal(player);
+//                }
+                if (player.getType().equals("Cleric")) {
+                    this.playerHeal(player);
                 }
                 else {
-                    this.playerHeal(player);
+                    this.playerAttack(player);
                 }
                 currentRoom.checkForDead();
                 this.checkForDead();

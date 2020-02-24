@@ -6,6 +6,7 @@ import Players.Enemies.Orc;
 import Players.Enemies.Troll;
 import Players.Healer.Cleric;
 import Players.MeleeFighter.Knight;
+import Players.Player;
 import org.junit.Before;
 import org.junit.Test;
 

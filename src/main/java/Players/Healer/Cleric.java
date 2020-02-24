@@ -15,4 +15,10 @@ public class Cleric extends Healer {
     public void healPlayer(Player player){
         player.beHealed(getHealingItem().getHealingPower());
     }
+
+    @Override
+    public void attack(Player victim) {
+        double damage = this.weapon.getAttackPower(victim);
+        victim.takeHealthDamage(damage);
+    }
 }
