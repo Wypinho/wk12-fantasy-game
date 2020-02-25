@@ -141,6 +141,81 @@ public class Game {
         }
         if (currentRoom.roomClear()){
             this.lootTreasure();
+            this.lootObjects();
+        }
+    }
+
+    private void lootObjects() {
+        Player player;
+        ArrayList<IWeapon> weapons = currentRoom.getWeapons();
+        for (IWeapon weapon : weapons){
+            String weaponOptions = String.format("You found a %s. What is to be done?", weapon.getType());
+            System.out.println(weaponOptions);
+            for (int j=0; j<this.players.size(); j++){
+                player = this.players.get(j);
+                String weaponAssignOptions = String.format("Type %s to assign to %s the %s.", j+1, player.getName(), player.getType();
+                System.out.println(weaponAssignOptions);
+            }
+            String weaponDiscardOption = String.format("Type %s to discard the %s.", this.players.size() + 1, weapon.getType();
+            System.out.println(weaponDiscardOption);
+
+            while (!scanner.hasNextInt()) {
+                String input = scanner.next();
+                System.out.printf("\"%s\" is not a valid number.\n", input);
+            }
+            int weaponChoice = scanner.nextInt();
+            while (weaponChoice < 1 || weaponChoice > this.players.size() + 1) {
+                String validPrompt = String.format("Please type a number between 1 and %s", this.players.size() + 1);
+                System.out.println(validPrompt);
+                weaponChoice = scanner.nextInt();
+            }
+            if (weaponChoice < this.players.size() + 1){
+                player = this.players.get(weaponChoice-1);
+                player.receiveNewWeapon(weapon);
+                String weaponConfirm = String.format("The %s has been allocated to %s the %s!", weapon.getType(), player.getName(), player.getType());
+                System.out.println(weaponConfirm);
+            } else {
+                String weaponConfirm = String.format("The %s has been discarded!", weapon.getType());
+                System.out.println(weaponConfirm);
+            }
+        }
+
+        ArrayList<IHealable> healingItems = currentRoom.getHealingItems();
+        for (IHealable healingItem : healingItems){
+            String healingItemOptions = String.format("You found a %s. What is to be done?", healingItem.getType());
+            System.out.println(healingItemOptions);
+            for (int j=0; j<this.players.size(); j++){
+                player = this.players.get(j);
+                if (player.getType().equals("Cleric")){
+                    String healingItemAssignOptions = String.format("Type %s to assign to %s the %s.", j+1, player.getName(), player.getType());
+                    System.out.println(healingItemAssignOptions);
+                } else {
+                    String healingItemUseOptions = String.format("Type %s to heal %s the %s, health %s.", j+1, player.getName(), player.getType(), player.getHealthPoints());
+                    System.out.println(healingItemUseOptions);
+                }
+            }
+            String healingItemDiscardOption = String.format("Type %s to discard the %s.", this.players.size() + 1, weapon.getType();
+            System.out.println(healingItemDiscardOption);
+
+            while (!scanner.hasNextInt()) {
+                String input = scanner.next();
+                System.out.printf("\"%s\" is not a valid number.\n", input);
+            }
+            int weaponChoice = scanner.nextInt();
+            while (weaponChoice < 1 || weaponChoice > this.players.size() + 1) {
+                String validPrompt = String.format("Please type a number between 1 and %s", this.players.size() + 1);
+                System.out.println(validPrompt);
+                weaponChoice = scanner.nextInt();
+            }
+            if (weaponChoice < this.players.size() + 1){
+                player = this.players.get(weaponChoice-1);
+                player.receiveNewWeapon(weapon);
+                String weaponConfirm = String.format("The %s has been allocated to %s the %s!", weapon.getType(), player.getName(), player.getType());
+                System.out.println(weaponConfirm);
+            } else {
+                String weaponConfirm = String.format("The %s has been discarded!", weapon.getType());
+                System.out.println(weaponConfirm);
+            }
         }
     }
 
