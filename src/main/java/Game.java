@@ -153,10 +153,10 @@ public class Game {
             System.out.println(weaponOptions);
             for (int j=0; j<this.players.size(); j++){
                 player = this.players.get(j);
-                String weaponAssignOptions = String.format("Type %s to assign to %s the %s.", j+1, player.getName(), player.getType();
+                String weaponAssignOptions = String.format("Type %s to assign to %s the %s.", j+1, player.getName(), player.getType());
                 System.out.println(weaponAssignOptions);
             }
-            String weaponDiscardOption = String.format("Type %s to discard the %s.", this.players.size() + 1, weapon.getType();
+            String weaponDiscardOption = String.format("Type %s to discard the %s.", this.players.size() + 1, weapon.getType());
             System.out.println(weaponDiscardOption);
 
             while (!scanner.hasNextInt()) {
@@ -194,27 +194,33 @@ public class Game {
                     System.out.println(healingItemUseOptions);
                 }
             }
-            String healingItemDiscardOption = String.format("Type %s to discard the %s.", this.players.size() + 1, weapon.getType();
+            String healingItemDiscardOption = String.format("Type %s to discard the %s.", this.players.size() + 1, healingItem.getType());
             System.out.println(healingItemDiscardOption);
 
             while (!scanner.hasNextInt()) {
                 String input = scanner.next();
                 System.out.printf("\"%s\" is not a valid number.\n", input);
             }
-            int weaponChoice = scanner.nextInt();
-            while (weaponChoice < 1 || weaponChoice > this.players.size() + 1) {
+            int healingItemChoice = scanner.nextInt();
+            while (healingItemChoice < 1 || healingItemChoice > this.players.size() + 1) {
                 String validPrompt = String.format("Please type a number between 1 and %s", this.players.size() + 1);
                 System.out.println(validPrompt);
-                weaponChoice = scanner.nextInt();
+                healingItemChoice = scanner.nextInt();
             }
-            if (weaponChoice < this.players.size() + 1){
-                player = this.players.get(weaponChoice-1);
-                player.receiveNewWeapon(weapon);
-                String weaponConfirm = String.format("The %s has been allocated to %s the %s!", weapon.getType(), player.getName(), player.getType());
-                System.out.println(weaponConfirm);
+            if (healingItemChoice < this.players.size() + 1){
+                player = this.players.get(healingItemChoice-1);
+                if (player.getType().equals("Cleric")) {
+                    player.receiveNewHealingItem(healingItem);
+                    String healingItemConfirm = String.format("The %s has been allocated to %s the %s!", healingItem.getType(), player.getName(), player.getType());
+                    System.out.println(healingItemConfirm);
+                } else {
+                    player.beHealed(healingItem.getHealingPower());
+                    String healingItemConfirm = String.format("%s the %s's health is now %s!", player.getName(), player.getType(), player.getHealthPoints());
+                    System.out.println(healingItemConfirm);
+                }
             } else {
-                String weaponConfirm = String.format("The %s has been discarded!", weapon.getType());
-                System.out.println(weaponConfirm);
+                String healingItemConfirm = String.format("The %s has been discarded!", healingItem.getType());
+                System.out.println(healingItemConfirm);
             }
         }
     }
