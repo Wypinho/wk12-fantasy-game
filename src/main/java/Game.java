@@ -141,6 +141,7 @@ public class Game {
         }
         if (currentRoom.roomClear()){
             this.lootTreasure();
+//            no point in doing this for the final room...
             this.lootObjects();
         }
     }
@@ -153,6 +154,7 @@ public class Game {
             System.out.println(weaponOptions);
             for (int j=0; j<this.players.size(); j++){
                 player = this.players.get(j);
+//                should display currently assigned weapon here
                 String weaponAssignOptions = String.format("Type %s to assign to %s the %s.", j+1, player.getName(), player.getType());
                 System.out.println(weaponAssignOptions);
             }
@@ -187,6 +189,7 @@ public class Game {
             for (int j=0; j<this.players.size(); j++){
                 player = this.players.get(j);
                 if (player.getType().equals("Cleric")){
+                    //                should display currently assigned healingItem here
                     String healingItemAssignOptions = String.format("Type %s to assign to %s the %s.", j+1, player.getName(), player.getType());
                     System.out.println(healingItemAssignOptions);
                 } else {
