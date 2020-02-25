@@ -10,9 +10,9 @@ public class Cleric extends Healer {
     public Cleric(String name) {
         super(name);
         this.healthPoints = 80;
-        this.healingItem = new Potion();
+//        this.healingItem = new Potion();
         this.type = "Cleric";
-        this.weapon = new Sword();
+//        this.weapon = new Sword();
     }
 
     @Override

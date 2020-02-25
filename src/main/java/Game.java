@@ -85,14 +85,20 @@ public class Game {
             if (player.getType().equals("Cleric")) {
                 IHealable healingItem = this.potentialHealingItems.get(random.nextInt(this.potentialHealingItems.size()));
                 player.receiveNewHealingItem(healingItem);
+                String confirmHealerItem = String.format("%s the %s received a %s?", player.getName(), player.getType(), healingItem.getType());
+                System.out.println(confirmHealerItem);
                 this.potentialHealingItems.remove(healingItem);
 
                 IWeapon weapon = this.potentialWeapons.get(random.nextInt(this.potentialWeapons.size()));
                 player.receiveNewWeapon(weapon);
+                String confirmHealerWeapon = String.format("%s the %s received a %s?", player.getName(), player.getType(), weapon.getType());
+                System.out.println(confirmHealerWeapon);
                 this.potentialWeapons.remove(weapon);
             } else {
                 IWeapon weapon = this.potentialWeapons.get(random.nextInt(this.potentialWeapons.size()));
                 player.receiveNewWeapon(weapon);
+                String confirmWeapon = String.format("%s the %s received a %s?", player.getName(), player.getType(), weapon.getType());
+                System.out.println(confirmWeapon);
                 this.potentialWeapons.remove(weapon);
             }
         }
