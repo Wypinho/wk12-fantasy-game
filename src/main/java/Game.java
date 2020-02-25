@@ -1,9 +1,12 @@
+import Items.HealingItems.Herb;
+import Items.HealingItems.IHealable;
+import Items.HealingItems.Potion;
 import Items.Treasure.Treasure;
+import Items.Weapons.Club;
+import Items.Weapons.IWeapon;
 import Items.Weapons.Sword;
 import Players.Enemies.Enemy;
 import Players.Healer.Cleric;
-import Players.Healer.Healer;
-import Players.IDamage;
 import Players.MeleeFighter.Knight;
 import Players.Player;
 import Quest.Quest;
@@ -19,6 +22,9 @@ public class Game {
     private Quest quest;
     private Room currentRoom;
     private Random random;
+//    private ArrayList<IWeapon> weaponTypes;
+    private ArrayList<IWeapon> potentialWeapons;
+    private ArrayList<IHealable> potentialHealingItems;
 
     public Game(){
         this.players = new ArrayList<Player>();
@@ -26,14 +32,17 @@ public class Game {
         this.quest = new Quest();
         this.currentRoom = null;
         this.random = new Random();
+//        this.weaponTypes = new ArrayList<IWeapon>(Arrays.asList(new Sword(), new Club()));
+        this.potentialWeapons = new ArrayList<IWeapon>();
+        this.potentialHealingItems = new ArrayList<IHealable>();
     }
 
     public void playGame(){
         System.out.println("Welcome to Dragons & Dungeons!");
         this.playerSetUp();
         this.gameSetUp();
-        this.generateRandomObjects();
-        this.equipRandomObjects();
+        this.generatePotentialObjects();
+        this.equipStartingObjects();
         for (int i = 0; i < quest.roomCount(); i++){
             currentRoom = quest.getCurrentRoom(i);
             this.enterRoom();
@@ -52,11 +61,27 @@ public class Game {
         }
     }
 
-    private void generateRandomObjects() {
-        
+    private void generatePotentialObjects() {
+        for (int i = 0; i < 3; i++) {
+            Sword sword = new Sword();
+            this.potentialWeapons.add(sword);
+        }
+        for (int i = 0; i < 3; i++) {
+            Club club = new Club();
+            this.potentialWeapons.add(club);
+        }
+        for (int i = 0; i < 3; i++) {
+            Herb herb = new Herb();
+            this.potentialHealingItems.add(herb);
+        }
+        for (int i = 0; i < 3; i++) {
+            Potion potion = new Potion();
+            this.potentialHealingItems.add(potion);
+        }
     }
 
-    private void equipRandomObjects() {
+    private void equipStartingObjects() {
+
         for (Player player : this.players){
             if (player.getType().equals("Cleric")) {
 
