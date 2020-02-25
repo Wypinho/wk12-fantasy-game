@@ -27,6 +27,14 @@ public class Room {
         this.random = new Random();
     }
 
+    public void addWeapon(IWeapon weapon) {
+        this.weapons.add(weapon);
+    }
+
+    public void addHealingItem(IHealable healingItem) {
+        this.healingItems.add(healingItem);
+    }
+
     public void addTreasure(Treasure treasure) {
         this.treasures.add(treasure);
     }

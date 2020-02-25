@@ -47,8 +47,8 @@ public class RandomRoomGenerator {
         Room room = new Room();
         this.populateRoomWithEnemies(roomDifficulty, room);
         this.populateRoomWithTreasure(roomDifficulty, room);
-        this.populateRoomWithWeapons();
-        this.populateRoomWithHealingItems();
+        this.populateRoomWithWeapons(room);
+        this.populateRoomWithHealingItems(room);
         this.clearPotentialArrays();
         return room;
     }
@@ -78,6 +78,8 @@ public class RandomRoomGenerator {
     private void clearPotentialArrays() {
         potentialEnemies.clear();
         potentialTreasure.clear();
+        potentialWeapons.clear();
+        potentialHealingItems.clear();
     }
 
     private void generatePotentialEnemies(int difficulty){
@@ -102,6 +104,32 @@ public class RandomRoomGenerator {
             for (int j = difficulty - 2; j > 0; j--){
                 Gem gem = new Gem();
                 this.potentialTreasure.add(gem);
+            }
+        }
+    }
+
+    private void populateRoomWithWeapons(Room room) {
+        IWeapon weapon;
+        boolean populate;
+        for (int i = 0; i < 2; i++) {
+            populate = random.nextBoolean();
+            if (populate) {
+                weapon = this.potentialWeapons.get(random.nextInt(this.potentialWeapons.size()));
+                room.addWeapon(weapon);
+                this.potentialWeapons.remove(weapon);
+            }
+        }
+    }
+
+    private void populateRoomWithHealingItems(Room room) {
+        IHealable healingItem;
+        boolean populate;
+        for (int i = 0; i < 2; i++) {
+            populate = random.nextBoolean();
+            if (populate) {
+                healingItem = this.potentialHealingItems.get(random.nextInt(this.potentialHealingItems.size()));
+                room.addHealingItem(healingItem);
+                this.potentialHealingItems.remove(healingItem);
             }
         }
     }
