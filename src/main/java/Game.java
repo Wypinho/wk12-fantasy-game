@@ -22,7 +22,6 @@ public class Game {
     private Quest quest;
     private Room currentRoom;
     private Random random;
-//    private ArrayList<IWeapon> weaponTypes;
     private ArrayList<IWeapon> potentialWeapons;
     private ArrayList<IHealable> potentialHealingItems;
 
@@ -32,7 +31,6 @@ public class Game {
         this.quest = new Quest();
         this.currentRoom = null;
         this.random = new Random();
-//        this.weaponTypes = new ArrayList<IWeapon>(Arrays.asList(new Sword(), new Club()));
         this.potentialWeapons = new ArrayList<IWeapon>();
         this.potentialHealingItems = new ArrayList<IHealable>();
     }

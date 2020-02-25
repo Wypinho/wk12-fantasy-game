@@ -1,8 +1,14 @@
 package Quest.Rooms;
 
+import Items.HealingItems.Herb;
+import Items.HealingItems.IHealable;
+import Items.HealingItems.Potion;
 import Items.Treasure.Gem;
 import Items.Treasure.Gold;
 import Items.Treasure.Treasure;
+import Items.Weapons.Club;
+import Items.Weapons.IWeapon;
+import Items.Weapons.Sword;
 import Players.Enemies.Enemy;
 import Players.Enemies.Orc;
 import Players.Enemies.Troll;
@@ -13,12 +19,16 @@ import java.util.Random;
 public class RandomRoomGenerator {
     private ArrayList<Enemy> potentialEnemies;
     private ArrayList<Treasure> potentialTreasure;
+    private ArrayList<IWeapon> potentialWeapons;
+    private ArrayList<IHealable> potentialHealingItems;
     private Random random;
 
     public RandomRoomGenerator(){
         this.random = new Random();
         this.potentialEnemies = new ArrayList<Enemy>();
         this.potentialTreasure = new ArrayList<Treasure>();
+        this.potentialWeapons = new ArrayList<IWeapon>();
+        this.potentialHealingItems = new ArrayList<IHealable>();
     }
 
     public int potentialEnemiesCount() {
@@ -32,11 +42,37 @@ public class RandomRoomGenerator {
     public Room generateRoom(int roomDifficulty){
         this.generatePotentialEnemies(roomDifficulty);
         this.generatePotentialTreasure(roomDifficulty);
+        this.generatePotentialWeapons();
+        this.generatePotentialHealingItems();
         Room room = new Room();
         this.populateRoomWithEnemies(roomDifficulty, room);
         this.populateRoomWithTreasure(roomDifficulty, room);
+        this.populateRoomWithWeapons();
+        this.populateRoomWithHealingItems();
         this.clearPotentialArrays();
         return room;
+    }
+
+    private void generatePotentialHealingItems() {
+        for (int i = 0; i < 3; i++) {
+            Herb herb = new Herb();
+            this.potentialHealingItems.add(herb);
+        }
+        for (int i = 0; i < 3; i++) {
+            Potion potion = new Potion();
+            this.potentialHealingItems.add(potion);
+        }
+    }
+
+    private void generatePotentialWeapons() {
+        for (int i = 0; i < 3; i++) {
+            Sword sword = new Sword();
+            this.potentialWeapons.add(sword);
+        }
+        for (int i = 0; i < 3; i++) {
+            Club club = new Club();
+            this.potentialWeapons.add(club);
+        }
     }
 
     private void clearPotentialArrays() {

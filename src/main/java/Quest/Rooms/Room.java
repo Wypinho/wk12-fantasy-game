@@ -1,6 +1,8 @@
 package Quest.Rooms;
 
+import Items.HealingItems.IHealable;
 import Items.Treasure.Treasure;
+import Items.Weapons.IWeapon;
 import Players.Enemies.Enemy;
 import Players.Player;
 
@@ -12,12 +14,16 @@ public class Room {
     private ArrayList<Treasure> treasures;
     private ArrayList<Player> playersInRoom;
     private ArrayList<Enemy> enemies;
+    private ArrayList<IWeapon> weapons;
+    private ArrayList<IHealable> healingItems;
     private Random random;
 
     public Room() {
         this.treasures = new ArrayList<Treasure>();
         this.playersInRoom = new ArrayList<Player>();
         this.enemies = new ArrayList<Enemy>();
+        this.weapons = new ArrayList<IWeapon>();
+        this.healingItems = new ArrayList<IHealable>();
         this.random = new Random();
     }
 
