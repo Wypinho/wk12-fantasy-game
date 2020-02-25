@@ -81,10 +81,19 @@ public class Game {
     }
 
     private void equipStartingObjects() {
-
         for (Player player : this.players){
             if (player.getType().equals("Cleric")) {
+                IHealable healingItem = this.potentialHealingItems.get(random.nextInt(this.potentialHealingItems.size()));
+                player.receiveNewHealingItem(healingItem);
+                this.potentialHealingItems.remove(healingItem);
 
+                IWeapon weapon = this.potentialWeapons.get(random.nextInt(this.potentialWeapons.size()));
+                player.receiveNewWeapon(weapon);
+                this.potentialWeapons.remove(weapon);
+            } else {
+                IWeapon weapon = this.potentialWeapons.get(random.nextInt(this.potentialWeapons.size()));
+                player.receiveNewWeapon(weapon);
+                this.potentialWeapons.remove(weapon);
             }
         }
     }

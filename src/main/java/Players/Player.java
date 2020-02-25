@@ -14,12 +14,14 @@ public abstract class Player {
     protected String type;
     private boolean dead;
     protected IWeapon weapon;
+    protected IHealable healingItem;
 
     public Player() {
         this.healthPoints = 0;
         this.wallet = new ArrayList<Treasure>();
         this.dead = false;
         this.weapon = null;
+        this.healingItem = null;
     }
 
     public void receiveNewWeapon(IWeapon newItem){
@@ -69,6 +71,10 @@ public abstract class Player {
     }
 
     public abstract void healPlayer(Player player);
+
+    public void receiveNewHealingItem(IHealable newItem){
+        this.healingItem = newItem;
+    }
 
     public void addTreasure(Treasure treasure){
         this.wallet.add(treasure);
