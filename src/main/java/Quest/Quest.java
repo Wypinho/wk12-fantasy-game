@@ -33,4 +33,8 @@ public class Quest {
     public Room getCurrentRoom(int index) {
         return this.rooms.get(index);
     }
+
+    public boolean lastRoom(Room room){
+        return this.rooms.indexOf(room) == this.rooms.size() - 1;
+    }
 }

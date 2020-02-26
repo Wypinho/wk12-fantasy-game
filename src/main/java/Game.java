@@ -142,7 +142,9 @@ public class Game {
         if (currentRoom.roomClear()){
             this.lootTreasure();
 //            no point in doing this for the final room...
-            this.lootObjects();
+            if (!quest.lastRoom(currentRoom)) {
+                this.lootObjects();
+            }
         }
     }
 
@@ -154,8 +156,7 @@ public class Game {
             System.out.println(weaponOptions);
             for (int j=0; j<this.players.size(); j++){
                 player = this.players.get(j);
-//                should display currently assigned weapon here
-                String weaponAssignOptions = String.format("Type %s to assign to %s the %s.", j+1, player.getName(), player.getType());
+                String weaponAssignOptions = String.format("Type %s to assign to %s the %s, current weapon is %s", j+1, player.getName(), player.getType(), player.getWeapon().getType());
                 System.out.println(weaponAssignOptions);
             }
             String weaponDiscardOption = String.format("Type %s to discard the %s.", this.players.size() + 1, weapon.getType());
@@ -189,8 +190,7 @@ public class Game {
             for (int j=0; j<this.players.size(); j++){
                 player = this.players.get(j);
                 if (player.getType().equals("Cleric")){
-                    //                should display currently assigned healingItem here
-                    String healingItemAssignOptions = String.format("Type %s to assign to %s the %s.", j+1, player.getName(), player.getType());
+                    String healingItemAssignOptions = String.format("Type %s to assign to %s the %s, current healing item is %s.", j+1, player.getName(), player.getType(), player.getHealingItem().getType());
                     System.out.println(healingItemAssignOptions);
                 } else {
                     String healingItemUseOptions = String.format("Type %s to heal %s the %s, health %s.", j+1, player.getName(), player.getType(), player.getHealthPoints());

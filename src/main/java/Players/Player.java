@@ -42,6 +42,10 @@ public abstract class Player {
         return this.name;
     }
 
+    public IHealable getHealingItem() {
+        return this.healingItem;
+    }
+
     public String getType() {
         return type;
     }

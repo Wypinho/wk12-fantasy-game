@@ -15,9 +15,9 @@ public abstract class Healer extends Player {
 //        this.healingItem = newItem;
 //    }
 
-    public IHealable getHealingItem(){
-        return this.healingItem;
-    }
+//    public IHealable getHealingItem(){
+//        return this.healingItem;
+//    }
 
 //    public abstract void healPlayer(Player player);
 
