@@ -7,6 +7,8 @@ import Items.Weapons.IWeapon;
 import Items.Weapons.Sword;
 import Players.Enemies.Enemy;
 import Players.Healer.Cleric;
+import Players.MeleeFighter.Barbarian;
+import Players.MeleeFighter.Dwarf;
 import Players.MeleeFighter.Knight;
 import Players.Player;
 import Quest.Quest;
@@ -141,7 +143,6 @@ public class Game {
         }
         if (currentRoom.roomClear()){
             this.lootTreasure();
-//            no point in doing this for the final room...
             if (!quest.lastRoom(currentRoom)) {
                 this.lootObjects();
             }
@@ -367,10 +368,10 @@ public class Game {
 
             String classPrompt = String.format("Player %s, select your class: ", (i + 1));
             System.out.println(classPrompt);
-            System.out.println("Select Knight or Cleric?");
+            System.out.println("Select Knight, Dwarf, Barbarian or Cleric?");
             String playerClass = scanner.next();
-            while (!playerClass.equals("Knight") && !playerClass.equals("Cleric")) {
-                System.out.println("Please type 'Knight' or 'Cleric'?");
+            while (!playerClass.equals("Knight") && !playerClass.equals("Dwarf") && !playerClass.equals("Barbarian") && !playerClass.equals("Cleric")) {
+                System.out.println("Please type 'Knight', 'Dwarf', 'Barbarian' or 'Cleric'?");
                 playerClass = scanner.next();
             }
 
@@ -380,8 +381,14 @@ public class Game {
 
 //    made public for testing access
     public void addPlayer(String playerName, String playerClass) {
-        if (playerClass.equals("Knight")){
+        if (playerClass.equals("Knight")) {
             Player player = new Knight(playerName);
+            this.players.add(player);
+        } else if (playerClass.equals("Dwarf")) {
+            Player player = new Dwarf(playerName);
+            this.players.add(player);
+        } else if (playerClass.equals("Barbarian")){
+            Player player = new Barbarian(playerName);
             this.players.add(player);
         } else if (playerClass.equals("Cleric")){
             Player player = new Cleric(playerName);

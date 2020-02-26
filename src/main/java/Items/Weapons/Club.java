@@ -12,6 +12,9 @@ public class Club implements IWeapon {
     }
 
     public double getAttackPower(Player victim) {
+        if (victim.getType().equals(this.effectiveAgainst)) {
+            return this.attackPower * 2;
+        }
         return this.attackPower;
     }
 
