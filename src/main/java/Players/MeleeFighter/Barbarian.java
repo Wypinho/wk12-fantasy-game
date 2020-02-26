@@ -15,7 +15,7 @@ public class Barbarian extends MeleeFighter {
     public void attack(Player victim) {
         double multiplier = 1;
         if (this.weapon.getType().equals(this.specialism)){
-            multiplier += 4;
+            multiplier += 3;
         }
         double damage = this.weapon.getAttackPower(victim) * multiplier;
         victim.takeHealthDamage(damage);

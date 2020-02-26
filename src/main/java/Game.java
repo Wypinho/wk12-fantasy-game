@@ -2,6 +2,7 @@ import Items.HealingItems.Herb;
 import Items.HealingItems.IHealable;
 import Items.HealingItems.Potion;
 import Items.Treasure.Treasure;
+import Items.Weapons.Axe;
 import Items.Weapons.Club;
 import Items.Weapons.IWeapon;
 import Items.Weapons.Sword;
@@ -65,6 +66,10 @@ public class Game {
         for (int i = 0; i < 3; i++) {
             Sword sword = new Sword();
             this.potentialWeapons.add(sword);
+        }
+        for (int i = 0; i < 3; i++) {
+            Axe axe = new Axe();
+            this.potentialWeapons.add(axe);
         }
         for (int i = 0; i < 3; i++) {
             Club club = new Club();
