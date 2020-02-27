@@ -11,6 +11,7 @@ import Items.Weapons.IWeapon;
 import Items.Weapons.Sword;
 import Players.Enemies.Enemy;
 import Players.Healer.Cleric;
+import Players.MagicalFighter.Wizard;
 import Players.MeleeFighter.Barbarian;
 import Players.MeleeFighter.Dwarf;
 import Players.MeleeFighter.Knight;
@@ -118,6 +119,12 @@ public class Game {
                 String confirmSpell = String.format("%s the %s received a %s?", player.getName(), player.getType(), spell.getType());
                 System.out.println(confirmSpell);
                 this.potentialSpells.remove(spell);
+            } else {
+                IWeapon weapon = this.potentialWeapons.get(random.nextInt(this.potentialWeapons.size()));
+                player.receiveNewWeapon(weapon);
+                String confirmHealerWeapon = String.format("%s the %s received a %s?", player.getName(), player.getType(), weapon.getType());
+                System.out.println(confirmHealerWeapon);
+                this.potentialWeapons.remove(weapon);
             }
         }
     }
@@ -175,8 +182,10 @@ public class Game {
             System.out.println(weaponOptions);
             for (int j=0; j<this.players.size(); j++){
                 player = this.players.get(j);
-                String weaponAssignOptions = String.format("Type %s to assign to %s the %s, current weapon is %s", j+1, player.getName(), player.getType(), player.getWeapon().getType());
-                System.out.println(weaponAssignOptions);
+                if (!player.getType().equals("Wizard")) {
+                    String weaponAssignOptions = String.format("Type %s to assign to %s the %s, current weapon is %s", j + 1, player.getName(), player.getType(), player.getWeapon().getType());
+                    System.out.println(weaponAssignOptions);
+                }
             }
             String weaponDiscardOption = String.format("Type %s to discard the %s.", this.players.size() + 1, weapon.getType());
             System.out.println(weaponDiscardOption);
@@ -243,6 +252,44 @@ public class Game {
             } else {
                 String healingItemConfirm = String.format("The %s has been discarded!", healingItem.getType());
                 System.out.println(healingItemConfirm);
+            }
+        }
+
+        ArrayList<ISpell> spells = currentRoom.getSpells();
+//        int magicalFighterCount = 0;
+        for (ISpell spell : spells){
+            String spellOptions = String.format("You found a %s spell. What is to be done?", spell.getType());
+            System.out.println(spellOptions);
+            for (int j=0; j<this.players.size(); j++){
+                player = this.players.get(j);
+                if (player.getType().equals("Wizard")) {
+//                    magicalFighterCount += 1;
+                    String spellAssignOptions = String.format("Type %s to assign to %s the %s, current spell is %s", j + 1, player.getName(), player.getType(), player.getSpell().getType());
+                    System.out.println(spellAssignOptions);
+                }
+            }
+            String spellDiscardOption = String.format("Type %s to discard the %s spell.", this.players.size() + 1, spell.getType());
+            System.out.println(spellDiscardOption);
+
+            while (!scanner.hasNextInt()) {
+                String input = scanner.next();
+                System.out.printf("\"%s\" is not a valid number.\n", input);
+            }
+            int spellChoice = scanner.nextInt();
+            while (spellChoice < 1 || spellChoice > this.players.size() + 1) {
+                String validPrompt = String.format("Please type a number between 1 and %s", this.players.size() + 1);
+                System.out.println(validPrompt);
+                spellChoice = scanner.nextInt();
+            }
+            if (spellChoice < this.players.size() + 1){
+//                int playerIndex = this.players.indexOf(player);
+                player = this.players.get(spellChoice-1);
+                player.receiveNewSpell(spell);
+                String spellConfirm = String.format("The %s spell has been allocated to %s the %s!", spell.getType(), player.getName(), player.getType());
+                System.out.println(spellConfirm);
+            } else {
+                String spellConfirm = String.format("The %s has been discarded!", spell.getType());
+                System.out.println(spellConfirm);
             }
         }
     }
@@ -386,10 +433,10 @@ public class Game {
 
             String classPrompt = String.format("Player %s, select your class: ", (i + 1));
             System.out.println(classPrompt);
-            System.out.println("Select Knight, Dwarf, Barbarian or Cleric?");
+            System.out.println("Select Knight, Dwarf, Barbarian, Cleric or Wizard?");
             String playerClass = scanner.next();
-            while (!playerClass.equals("Knight") && !playerClass.equals("Dwarf") && !playerClass.equals("Barbarian") && !playerClass.equals("Cleric")) {
-                System.out.println("Please type 'Knight', 'Dwarf', 'Barbarian' or 'Cleric'?");
+            while (!playerClass.equals("Knight") && !playerClass.equals("Dwarf") && !playerClass.equals("Barbarian") && !playerClass.equals("Cleric") && !playerClass.equals("Wizard")) {
+                System.out.println("Please type 'Knight', 'Dwarf', 'Barbarian', 'Cleric' or 'Wizard'?");
                 playerClass = scanner.next();
             }
 
@@ -410,6 +457,9 @@ public class Game {
             this.players.add(player);
         } else if (playerClass.equals("Cleric")){
             Player player = new Cleric(playerName);
+            this.players.add(player);
+        } else if (playerClass.equals("Wizard")){
+            Player player = new Wizard(playerName);
             this.players.add(player);
         }
     }

@@ -50,6 +50,7 @@ public class RandomRoomGenerator {
         this.generatePotentialTreasure(roomDifficulty);
         this.generatePotentialWeapons();
         this.generatePotentialHealingItems();
+        this.generatePotentialSpells();
         Room room = new Room();
         this.populateRoomWithEnemies(roomDifficulty, room);
         this.populateRoomWithTreasure(roomDifficulty, room);
@@ -101,6 +102,7 @@ public class RandomRoomGenerator {
         potentialTreasure.clear();
         potentialWeapons.clear();
         potentialHealingItems.clear();
+        potentialSpells.clear();
     }
 
     private void generatePotentialEnemies(int difficulty){
@@ -151,6 +153,19 @@ public class RandomRoomGenerator {
                 healingItem = this.potentialHealingItems.get(random.nextInt(this.potentialHealingItems.size()));
                 room.addHealingItem(healingItem);
                 this.potentialHealingItems.remove(healingItem);
+            }
+        }
+    }
+
+    private void populateRoomWithSpells(Room room) {
+        ISpell spell;
+        boolean populate;
+        for (int i = 0; i < 2; i++) {
+            populate = random.nextBoolean();
+            if (populate) {
+                spell = this.potentialSpells.get(random.nextInt(this.potentialSpells.size()));
+                room.addSpell(spell);
+                this.potentialSpells.remove(spell);
             }
         }
     }

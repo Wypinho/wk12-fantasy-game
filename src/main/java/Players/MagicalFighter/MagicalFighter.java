@@ -15,10 +15,11 @@ public abstract class MagicalFighter extends Player {
     @Override
     public void attack(Player victim) {
         double multiplier = 1;
-        if (this.weapon.getType().equals(this.specialism)){
+//        should be get element not type
+        if (this.spell.getType().equals(this.specialism)){
             multiplier += 1;
         }
-        double damage = this.weapon.getAttackPower(victim) * multiplier;
+        double damage = this.spell.getAttackPower(victim) * multiplier;
         victim.takeHealthDamage(damage);
     }
 

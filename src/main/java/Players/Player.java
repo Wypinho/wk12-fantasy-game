@@ -16,7 +16,7 @@ public abstract class Player {
     private boolean dead;
     protected IWeapon weapon;
     protected IHealable healingItem;
-    private ISpell spell;
+    protected ISpell spell;
 
 
     public Player() {
@@ -38,6 +38,10 @@ public abstract class Player {
 
     public IWeapon getWeapon(){
         return this.weapon;
+    }
+
+    public ISpell getSpell(){
+        return this.spell;
     }
 
     public abstract void attack(Player victim);
