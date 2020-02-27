@@ -1,5 +1,7 @@
 package Players.MagicalFighter;
 
+import Items.Spells.ISpell;
+import Items.Weapons.IWeapon;
 import Players.Player;
 
 public abstract class MagicalFighter extends Player {

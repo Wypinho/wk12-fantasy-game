@@ -1,6 +1,9 @@
 import Items.HealingItems.Herb;
 import Items.HealingItems.IHealable;
 import Items.HealingItems.Potion;
+import Items.Spells.Burn;
+import Items.Spells.Freeze;
+import Items.Spells.ISpell;
 import Items.Treasure.Treasure;
 import Items.Weapons.Axe;
 import Items.Weapons.Club;
@@ -27,6 +30,7 @@ public class Game {
     private Random random;
     private ArrayList<IWeapon> potentialWeapons;
     private ArrayList<IHealable> potentialHealingItems;
+    private ArrayList<ISpell> potentialSpells;
 
     public Game(){
         this.players = new ArrayList<Player>();
@@ -36,6 +40,7 @@ public class Game {
         this.random = new Random();
         this.potentialWeapons = new ArrayList<IWeapon>();
         this.potentialHealingItems = new ArrayList<IHealable>();
+        this.potentialSpells = new ArrayList<ISpell>();
     }
 
     public void playGame(){
@@ -76,6 +81,14 @@ public class Game {
             this.potentialWeapons.add(club);
         }
         for (int i = 0; i < 3; i++) {
+            Burn burn = new Burn();
+            this.potentialSpells.add(burn);
+        }
+        for (int i = 0; i < 3; i++) {
+            Freeze freeze = new Freeze();
+            this.potentialSpells.add(freeze);
+        }
+        for (int i = 0; i < 3; i++) {
             Herb herb = new Herb();
             this.potentialHealingItems.add(herb);
         }
@@ -99,12 +112,12 @@ public class Game {
                 String confirmHealerWeapon = String.format("%s the %s received a %s?", player.getName(), player.getType(), weapon.getType());
                 System.out.println(confirmHealerWeapon);
                 this.potentialWeapons.remove(weapon);
-            } else {
-                IWeapon weapon = this.potentialWeapons.get(random.nextInt(this.potentialWeapons.size()));
-                player.receiveNewWeapon(weapon);
-                String confirmWeapon = String.format("%s the %s received a %s?", player.getName(), player.getType(), weapon.getType());
-                System.out.println(confirmWeapon);
-                this.potentialWeapons.remove(weapon);
+            } else if (player.getType().equals("Wizard")) {
+                ISpell spell = this.potentialSpells.get(random.nextInt(this.potentialSpells.size()));
+                player.receiveNewSpell(spell);
+                String confirmSpell = String.format("%s the %s received a %s?", player.getName(), player.getType(), spell.getType());
+                System.out.println(confirmSpell);
+                this.potentialSpells.remove(spell);
             }
         }
     }

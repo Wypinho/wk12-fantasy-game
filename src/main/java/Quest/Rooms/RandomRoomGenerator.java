@@ -3,6 +3,9 @@ package Quest.Rooms;
 import Items.HealingItems.Herb;
 import Items.HealingItems.IHealable;
 import Items.HealingItems.Potion;
+import Items.Spells.Burn;
+import Items.Spells.Freeze;
+import Items.Spells.ISpell;
 import Items.Treasure.Gem;
 import Items.Treasure.Gold;
 import Items.Treasure.Treasure;
@@ -22,6 +25,7 @@ public class RandomRoomGenerator {
     private ArrayList<Treasure> potentialTreasure;
     private ArrayList<IWeapon> potentialWeapons;
     private ArrayList<IHealable> potentialHealingItems;
+    private ArrayList<ISpell> potentialSpells;
     private Random random;
 
     public RandomRoomGenerator(){
@@ -30,6 +34,7 @@ public class RandomRoomGenerator {
         this.potentialTreasure = new ArrayList<Treasure>();
         this.potentialWeapons = new ArrayList<IWeapon>();
         this.potentialHealingItems = new ArrayList<IHealable>();
+        this.potentialSpells = new ArrayList<ISpell>();
     }
 
     public int potentialEnemiesCount() {
@@ -62,6 +67,17 @@ public class RandomRoomGenerator {
         for (int i = 0; i < 3; i++) {
             Potion potion = new Potion();
             this.potentialHealingItems.add(potion);
+        }
+    }
+
+    private void generatePotentialSpells() {
+        for (int i = 0; i < 3; i++) {
+            Burn burn = new Burn();
+            this.potentialSpells.add(burn);
+        }
+        for (int i = 0; i < 3; i++) {
+            Freeze freeze = new Freeze();
+            this.potentialSpells.add(freeze);
         }
     }
 

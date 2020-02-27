@@ -1,6 +1,7 @@
 package Players;
 
 import Items.HealingItems.IHealable;
+import Items.Spells.ISpell;
 import Items.Treasure.Treasure;
 import Items.Weapons.IWeapon;
 
@@ -15,6 +16,8 @@ public abstract class Player {
     private boolean dead;
     protected IWeapon weapon;
     protected IHealable healingItem;
+    private ISpell spell;
+
 
     public Player() {
         this.healthPoints = 0;
@@ -22,6 +25,11 @@ public abstract class Player {
         this.dead = false;
         this.weapon = null;
         this.healingItem = null;
+        this.spell = null;
+    }
+
+    public void receiveNewSpell(ISpell newSpell){
+        this.spell = newSpell;
     }
 
     public void receiveNewWeapon(IWeapon newItem){
